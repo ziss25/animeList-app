@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  --primary: rgb(255, 0, 0);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* header */
+  .header {
+    @apply fixed flex h-14 top-0 right-0 left-0 px-7 z-30 text-white bg-transparent justify-between items-center 2xl:h-20;
+  }
+  .header-active-navigate {
+    @apply fixed flex h-14 top-0 right-0 left-0 px-7 z-30 text-white bg-transparent justify-between items-center bg-black;
+  }
+
+  /* hero */
+  .hero {
+    @apply w-screen h-screen bg-cover bg-no-repeat bg-right relative flex items-center px-5 top-0;
+  }
+  .hero__layer {
+    @apply bg-black opacity-60  absolute top-0 right-0 left-0 bottom-0;
+  }
+  .hero__context {
+    @apply relative z-10 text-white m-auto max-w-xl text-center md:text-start md:m-0 md:px-16 xl:max-w-3xl;
+  }
+
+  /* menuNavbar active */
+  .menuNavbar_active {
+    @apply left-0 transition;
+  }
+}
