@@ -4,6 +4,7 @@ const Home = () => {
   return (
     <>
       <Hero />
+      <div>anjay</div>
     </>
   );
 };

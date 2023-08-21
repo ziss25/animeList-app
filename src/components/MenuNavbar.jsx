@@ -29,7 +29,7 @@ const MenuNavbar = () => {
       </div>
 
       {isOpenMenuList ? (
-        <button className="md:hidden  menuNavbar__Layer fixed bg-black top-0 right-0 left-0 bottom-0 z-40 opacity-50" onClick={handleMenuList}>
+        <button className="md:hidden  menuNavbar__Layer fixed bg-black top-0 right-0 left-0 bottom-0 z-40 opacity-90" onClick={handleMenuList}>
           ada
         </button>
       ) : null}

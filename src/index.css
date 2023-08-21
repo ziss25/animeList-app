@@ -8,6 +8,13 @@
   --primary: rgb(255, 0, 0);
 }
 
+.typograpy-oveflow {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -31,12 +38,12 @@
 
   /* hero */
   .hero {
-    @apply w-screen h-screen bg-cover bg-no-repeat bg-right relative flex items-center px-5 top-0;
+    @apply w-screen h-screen bg-cover bg-no-repeat bg-center relative flex items-center px-5 top-0 md:h-[50vmax];
   }
   .hero__layer {
-    @apply bg-black opacity-60  absolute top-0 right-0 left-0 bottom-0;
+    @apply bg-gradient-to-r from-black from-10% to-transparent absolute top-0 right-0 left-0 bottom-0;
   }
   .hero__context {
-    @apply relative z-10 text-white m-auto max-w-xl text-center md:text-start md:m-0 md:px-16 xl:max-w-3xl;
+    @apply relative z-10 text-white m-auto max-w-xl md:m-0 md:px-16 2xl:max-w-4xl;
   }
 }
