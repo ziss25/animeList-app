@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
+/* costum or utils */
 * {
   font-family: 'Poppins', sans-serif;
 }
@@ -38,12 +39,15 @@
 
   /* hero */
   .hero {
-    @apply w-screen h-screen bg-cover bg-no-repeat bg-center relative flex items-center px-5 top-0 md:h-[50vmax];
+    @apply w-screen h-screen bg-cover bg-no-repeat bg-left-top relative flex items-center px-5 top-0 md:h-[50vmax];
   }
-  .hero__layer {
-    @apply bg-gradient-to-r from-black from-10% to-transparent absolute top-0 right-0 left-0 bottom-0;
+  .hero__layer--full {
+    @apply bg-gradient-to-r from-black to-transparent absolute top-0 right-0 left-0 bottom-0;
+  }
+  .hero__layer--bottomToTop {
+    @apply absolute bottom-0 right-0 left-0 h-64 z-20 bg-gradient-to-t from-black to-transparent;
   }
   .hero__context {
-    @apply relative z-10 text-white m-auto max-w-xl md:m-0 md:px-16 2xl:max-w-4xl;
+    @apply relative z-10 text-white px-4 max-w-xl md:m-0 md:px-16 2xl:max-w-4xl;
   }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import bgHero1 from '../assets/one-piece-bg.jpg';
-import bgDemonSLayer from '../assets/demon-slayer.jpg';
+import { bgOnePiece, bgDemonSLayer, bgNaruto, bgJujutsu, bgChainsawMan } from '../assets/index-img';
+import Star from './Stars';
 
 const HeroListShow = ({ listID }) => {
   const [title, setTitle] = useState('');
@@ -16,11 +16,24 @@ const HeroListShow = ({ listID }) => {
     setSynopsis(data.data.data.synopsis);
   };
 
+  //  validate dan mengambil background sesuai dengan id bg nya
   const getBgAnimeById = () => {
-    if (listID === 21) {
-      setBg(bgHero1);
-    } else {
-      setBg(bgDemonSLayer);
+    switch (listID) {
+      case 21:
+        setBg(bgOnePiece);
+        break;
+      case 1735:
+        setBg(bgNaruto);
+        break;
+      case 40748:
+        setBg(bgJujutsu);
+        break;
+      case 38000:
+        setBg(bgDemonSLayer);
+        break;
+      case 44511:
+        setBg(bgChainsawMan);
+        break;
     }
   };
 
@@ -30,20 +43,15 @@ const HeroListShow = ({ listID }) => {
   }, []);
 
   return (
-    <div className="hero " style={{ backgroundImage: `url(${bg})` }}>
-      <div className="hero__layer"></div>
-      <div className="hero__context">
+    <div className="hero" style={{ backgroundImage: `url(${bg})` }}>
+      <div className="hero__layer--full"></div>
+      <div className="hero__layer--bottomToTop"></div>
+      <div className="hero__context z-50">
         <h1 className="text-4xl font-bold mb-2  2xl:text-6xl 2xl:mb-8">{title}</h1>
         <p className="mb-2 typograpy-oveflow md:text-md 2xl:text-2xl">{synopsis}</p>
-        <div className="rating flex gap-5">
-          <div className="raring__stars">
-            <span className="fa fa-star checked text-[var(--primary)]"></span>
-            <span className="fa fa-star checked text-[var(--primary)]"></span>
-            <span className="fa fa-star checked text-[var(--primary)]"></span>
-            <span className="fa fa-star checked text-[var(--primary)]"></span>
-            <span className="fa fa-star"></span>
-          </div>
-          <div className="raring__number mb-3">
+        <div className="rating flex gap-5 items-center my-3 2xl:text-2xl">
+          <Star stars={score} />
+          <div className="raring__number ">
             <span>{score}</span>
             <span className="mx-2">/</span>
             <span>10</span>
