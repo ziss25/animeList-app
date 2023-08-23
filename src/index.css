@@ -16,6 +16,26 @@
   overflow: hidden;
 }
 
+.typograpy-overflow-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* custom style navigation swiper */
+/* .swiper-button-next,
+.swiper-button-prev {
+  padding: 2rem 3rem;
+  background-color: red;
+  transform: scale(0.4);
+  border-radius: 1rem;
+  top: 40%;
+  color: white !important;
+  fill: white !important;
+  stroke: white !important;
+} */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

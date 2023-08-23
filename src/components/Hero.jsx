@@ -18,8 +18,8 @@ const Hero = () => {
           disableOnInteraction: false,
         }}
         loop={true}
-        navigation={true}
         modules={[Autoplay]}
+        className=""
       >
         {data.map((list, index) => (
           <SwiperSlide key={index}>

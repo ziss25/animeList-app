@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <section className="overflow-hidden h-[3000px]">
+        <section className="overflow-hidden  bg-black">
           <Provider>
             <Headers />
             <MenuNavbar />

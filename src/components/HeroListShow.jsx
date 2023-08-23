@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { bgOnePiece, bgDemonSLayer, bgNaruto, bgJujutsu, bgChainsawMan } from '../assets/index-img';
 import Star from './Stars';
 
