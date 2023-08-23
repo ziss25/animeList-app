@@ -9,8 +9,8 @@ const Home = () => {
       <Hero />
       <section className="p-5 text-white md:p-10">
         <TopRatedAnimes />
-        <UpcomingAnimes />
-        <SeasonNow />
+        {/* <UpcomingAnimes />
+        <SeasonNow /> */}
       </section>
     </>
   );

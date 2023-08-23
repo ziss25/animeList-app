@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { fetchAnimesTopRated } from '../api/apiMyAnimeList';
+import axios from 'axios';
+
+// import { fetchAnimesTopRated } from '../api/apiMyAnimeList';
 import Poster from './Poster';
 import { Swiper, SwiperSlide } from 'swiper/react';
 // import { Navigation } from 'swiper/modules';
@@ -7,15 +9,17 @@ import 'swiper/css/navigation';
 import 'swiper/css';
 
 const TopRatedAnimes = () => {
+  const baseUrl = 'https://api.jikan.moe/v4';
   const [dataAnimeTopRanked, SetdataAnimeTopRanked] = useState([]);
 
-  const getDataAnimesRated = async () => {
-    const data = await fetchAnimesTopRated();
-    SetdataAnimeTopRanked(data);
+  const fetchAnimesTopRated = async (query) => {
+    const { data } = await axios.get(baseUrl + '/top/anime');
+    SetdataAnimeTopRanked(data.data);
   };
 
   useEffect(() => {
-    getDataAnimesRated();
+    fetchAnimesTopRated();
+    console.log(dataAnimeTopRanked);
   }, []);
 
   return (
