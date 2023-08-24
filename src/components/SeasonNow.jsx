@@ -7,11 +7,12 @@ const SeasonNow = () => {
 
   const getAnimesSeasonNow = async () => {
     const response = await fetchAnimesSeasonNow();
-    setData(response);
+    setData(response.data);
   };
 
   useEffect(() => {
     getAnimesSeasonNow();
+    console.log(data);
   }, []);
 
   return (

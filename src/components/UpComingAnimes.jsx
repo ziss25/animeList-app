@@ -9,7 +9,7 @@ const UpcomingAnimes = () => {
 
   const getAnimesUpComing = async () => {
     const response = await fetchAnimesUpComing();
-    setData(response);
+    setData(response.data);
   };
 
   useEffect(() => {
