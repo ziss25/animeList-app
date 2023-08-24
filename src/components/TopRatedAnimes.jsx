@@ -20,13 +20,23 @@ const TopRatedAnimes = () => {
   }, []);
 
   return (
-    <div className="top-rated-anime">
-      <h1 className="mb-5 text-xl font-bold">Top Rated</h1>
+    <div className="top-rated-anime relative">
+      <div className="sliderMarker-container">
+        <div className="sliderMarker sliderMarker__right ">
+          <i className="fa fa-caret-right text-[var(--primary)]  text-xl" aria-hidden="true"></i>
+        </div>
+        <div className="sliderMarker sliderMarker__left">
+          <i className="fa fa-caret-left text-[var(--primary)]  text-xl" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <h1 className="mb-5 text-xl font-bold border-b-4 pb-1 border-[var(--primary)] inline-block">Top Rated</h1>
+
       <Swiper
         slidesPerView={5}
         breakpoints={{
           '@0.00': {
-            slidesPerView: 2,
+            slidesPerView: 3,
             spaceBetween: 10,
           },
           '@0.75': {

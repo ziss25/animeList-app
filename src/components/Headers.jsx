@@ -27,7 +27,14 @@ const Headers = () => {
 
       <Navbar mode="desktop" />
 
-      <button className="px-6 py-1 font-semibold rounded-md text-sm bg-[var(--primary)] md:text-md md:px-8 2xl:text-lg 2xl:px-10 2xl:py-2 2xl:translate-y-1">log In</button>
+      <button
+        className="px-6 py-1 font-semibold rounded-md text-sm bg-[var(--primary)] md:text-md md:px-8 2xl:text-lg 2xl:px-10 2xl:py-2 2xl:translate-y-1"
+        onClick={() => {
+          alert('maaf masih tahap pengembangan');
+        }}
+      >
+        log In
+      </button>
     </div>
   );
 };

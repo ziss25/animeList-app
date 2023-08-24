@@ -70,4 +70,15 @@
   .hero__context {
     @apply relative z-10 text-white px-4 max-w-xl md:m-0 md:px-16 2xl:max-w-4xl;
   }
+
+  /* sliderMaker */
+  .sliderMarker {
+    @apply w-12 h-8 absolute top-[42%] z-20 flex justify-center items-center;
+  }
+  .sliderMarker__right {
+    @apply -right-9;
+  }
+  .sliderMarker__left {
+    @apply -left-9;
+  }
 }

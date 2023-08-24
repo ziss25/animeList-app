@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+const maxRetries = 3; // Maximum number of retry attempts
+const delayBetweenRetries = 3000; // Delay in milliseconds before retrying (3 seconds)
+const baseUrl = 'https://api.jikan.moe/v4';
+
 // promises handle -- limit request
 function makeRequestWithRetry(url, maxRetries, delay) {
   return new Promise((resolve, reject) => {
@@ -24,11 +28,7 @@ function makeRequestWithRetry(url, maxRetries, delay) {
   });
 }
 
-const maxRetries = 3; // Maximum number of retry attempts
-const delayBetweenRetries = 3000; // Delay in milliseconds before retrying (3 seconds)
-const baseUrl = 'https://api.jikan.moe/v4';
-
-const fetchAnimesTopRated = (query) => {
+const fetchAnimesTopRated = () => {
   return makeRequestWithRetry(`${baseUrl}/top/anime`, maxRetries, delayBetweenRetries)
     .then((response) => response.json())
     .then((data) => data)
