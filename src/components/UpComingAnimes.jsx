@@ -16,7 +16,7 @@ const UpcomingAnimes = () => {
   }, []);
 
   return (
-    <div className="top-rated-anime mt-5">
+    <div className="top-rated-anime mt-5 border">
       <h1 className="mb-5 text-xl font-bold">up coming</h1>
       <Swiper
         slidesPerView={5}
