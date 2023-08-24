@@ -1,7 +1,7 @@
 import Hero from '../components/Hero';
 import SeasonNow from '../components/SeasonNow';
 import TopRatedAnimes from '../components/TopRatedAnimes';
-import UpcomingAnimes from '../components/UpcomingAnimes';
+import UpcomingAnimes from '../components/UpComingAnimes';
 
 const Home = () => {
   return (
@@ -9,7 +9,7 @@ const Home = () => {
       <Hero />
       <section className="p-5 text-white md:p-10">
         <TopRatedAnimes />
-        <UpcomingAnimes />
+        {/* <UpcomingAnimes /> */}
         <SeasonNow />
       </section>
     </>
