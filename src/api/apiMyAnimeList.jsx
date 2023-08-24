@@ -50,3 +50,6 @@ const fetchAnimesSeasonNow = async () => {
 };
 
 export { fetchAnimesTopRated, fetchAnimesUpComing, fetchAnimesSeasonNow };
+
+// kalo ada pesan ini .... walapaun erorr tapi ia reject dan request lagi
+// Failed to load resource: the server responded with a status of 429 (Too Many Requests)

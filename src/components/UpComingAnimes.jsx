@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { fetchAnimesUpComing } from '../api/apiMyAnimeList';
 import Poster from './Poster';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
 
 const UpcomingAnimes = () => {
-  const [data, setData] = useState([]);
+  const [dataUpComingAnimes, setDataUpComingAnimes] = useState([]);
 
   const getAnimesUpComing = async () => {
     const response = await fetchAnimesUpComing();
-    setData(response.data);
+    setDataUpComingAnimes(response.data);
   };
 
   useEffect(() => {
@@ -42,7 +41,7 @@ const UpcomingAnimes = () => {
         spaceBetween={10}
         className=""
       >
-        {data.map((data, index) => (
+        {dataUpComingAnimes.map((data, index) => (
           <SwiperSlide key={index}>
             <Poster data={data} />
           </SwiperSlide>
