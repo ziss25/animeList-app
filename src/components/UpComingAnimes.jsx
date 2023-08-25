@@ -26,7 +26,7 @@ const UpcomingAnimes = () => {
         </div>
       </div>
 
-      <h1 className="mb-5 text-xl font-bold border-b-4 border-[var(--primary)] inline-block">Up Coming</h1>
+      <h1 className="mb-5 text-xl font-bold border-b-4 pb-1 border-[var(--primary)] inline-block">Up Coming</h1>
 
       <Swiper
         slidesPerView={5}

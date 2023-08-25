@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Poster = ({ data, index, rated }) => {
   const [title, setTitle] = useState('');
   const [img, setImg] = useState('');
   const [rating, setRating] = useState('');
+
+  const navigate = useNavigate();
 
   const getDataList = () => {
     setTitle(data.title);
@@ -11,12 +14,18 @@ const Poster = ({ data, index, rated }) => {
     setRating(data.score);
   };
 
+  // menghandle if di click akan di rediarect ke path dengan component, berdasarkan id
+  const handleCardClick = () => {
+    const id = data.mal_id;
+    navigate(`/poster/${id}`);
+  };
+
   useEffect(() => {
     getDataList();
   }, []);
 
   return (
-    <div key={index} className="poster animeRatedList h-max max-w-xs flex flex-col justify-center items-center relative">
+    <div key={index} className="poster animeRatedList h-max max-w-xs flex flex-col justify-center items-center relative" onClick={handleCardClick}>
       {rated ? (
         <div className="absolute top-0 -left-1 bg-[var(--primary)] px-3 scale-75 py-1 flex items-center rounded-full text-sm gap-2">
           <p className="">{rating}</p>
