@@ -33,6 +33,7 @@ const fetchAnimesById = (id) => {
     .then((response) => response.json())
     .then((data) => data)
     .catch((error) => error);
+  // https://api.jikan.moe/v4/anime/{id}
 };
 
 const fetchAnimesTopRated = () => {

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { bgOnePiece, bgDemonSLayer, bgNaruto, bgJujutsu, bgChainsawMan } from '../assets/index-img';
 import Star from './Stars';
 
@@ -57,7 +58,9 @@ const HeroListShow = ({ listID }) => {
             <span>10</span>
           </div>
         </div>
-        <button className="px-6 py-2 font-semibold rounded-sm text-sm bg-[var(--primary)] md:text-md md:px-10 2xl:text-lg 2xl:px-14 2xl:py-2 2xl:translate-y-1">detail</button>
+        <button className="px-6 py-2 font-semibold rounded-sm text-sm bg-[var(--primary)] md:text-md md:px-10 2xl:text-lg 2xl:px-14 2xl:py-2 2xl:translate-y-1">
+          <Link to={`/poster/${listID}`}>detail</Link>
+        </button>
       </div>
     </div>
   );
