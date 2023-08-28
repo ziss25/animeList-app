@@ -4,7 +4,7 @@ import Button from '../Elements/Button';
 import Title from '../Elements/Title';
 import CardList from '../Fragments/CardList';
 
-const SideCards = ({ dataFetch, title }) => {
+const Sidecards = ({ dataFetch, title }) => {
   const [dataAnime, SetDataAnime] = useState([]);
   const [pagination, setPagination] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -35,4 +35,4 @@ const SideCards = ({ dataFetch, title }) => {
   );
 };
 
-export default SideCards;
+export default Sidecards;
