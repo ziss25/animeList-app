@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchAnimesById } from '../api/apiMyAnimeList';
-import GlobalLoading from './GlobalLoading';
+import GlobalLoading from '../components/GlobalLoading';
 
 const PosterDetail = () => {
   // pull id params menggunakan use Params bawaan dari react-router-dom

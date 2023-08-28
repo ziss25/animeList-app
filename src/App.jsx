@@ -1,13 +1,13 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import Headers from './components/Headers';
+import Headers from './components/Templates/Headers';
 import ComingSoon from './pages/ComingSoon';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Popular from './pages/Popular';
 import Search from './pages/Search';
+import PosterDetail from './pages/PosterDetail';
 import { Provider } from './context/myContext';
-import MenuNavbar from './components/MenuNavbar';
-import PosterDetail from './components/PosterDetail';
+import MenuNavbar from './components/Templates/MenuNavbar';
 import GlobalLoading from './components/GlobalLoading';
 import { useEffect, useState } from 'react';
 

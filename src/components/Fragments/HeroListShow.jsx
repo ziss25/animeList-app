@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { bgOnePiece, bgDemonSLayer, bgNaruto, bgJujutsu, bgChainsawMan } from '../assets/index-img';
-import Star from './Stars';
+import { bgOnePiece, bgDemonSLayer, bgNaruto, bgJujutsu, bgChainsawMan } from '../../assets/index-img';
+import Star from '../Elements/Stars';
 
 const HeroListShow = ({ listID }) => {
   const [title, setTitle] = useState('');

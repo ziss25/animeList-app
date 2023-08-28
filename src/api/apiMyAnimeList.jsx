@@ -57,7 +57,14 @@ const fetchAnimesSeasonNow = async () => {
     .catch((error) => error);
 };
 
-export { fetchAnimesTopRated, fetchAnimesUpComing, fetchAnimesSeasonNow, fetchAnimesById };
+const fetchAnimesTopByFavorite = async () => {
+  return makeRequestWithRetry(`${baseUrl}/top/anime?filter=favorite`, maxRetries, delayBetweenRetries)
+    .then((response) => response.json())
+    .then((data) => data)
+    .catch((error) => error);
+};
+
+export { fetchAnimesTopRated, fetchAnimesUpComing, fetchAnimesSeasonNow, fetchAnimesById, fetchAnimesTopByFavorite };
 
 // kalo ada pesan ini .... walapaun erorr tapi ia reject dan request lagi
 // Failed to load resource: the server responded with a status of 429 (Too Many Requests)

@@ -71,24 +71,3 @@ function CustomLink({ to, children, mode, ...props }) {
     </>
   );
 }
-
-{
-  /* <ul className=" px-5 flex flex-col gap-3">
-  <div className="p-3 flex gap-5 items-center rounded-md overflow-hidden">
-    <i className="fa fa-home text-xl" aria-hidden="true"></i>
-    <CustomLink to="/">Home</CustomLink>
-  </div>
-  <div className="p-3 flex gap-5 items-center rounded-md overflow-hidden">
-    <i className="fa fa-fire" aria-hidden="true"></i>
-    <CustomLink to="/popular">popular</CustomLink>
-  </div>
-  <div className="p-3 flex gap-5 items-center rounded-md overflow-hidden">
-    <i className="fa fa-calendar" aria-hidden="true"></i>
-    <CustomLink to="/comingSoon">coming Soon</CustomLink>
-  </div>
-  <div className="p-3 flex gap-5 items-center rounded-md overflow-hidden">
-    <i className="fa fa-search" aria-hidden="true"></i>
-    <CustomLink to="/search">search</CustomLink>
-  </div>
-</ul>; */
-}

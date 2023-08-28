@@ -1,18 +1,12 @@
-import Hero from '../components/Hero';
-import SeasonNow from '../components/SeasonNow';
-import TopRatedAnimes from '../components/TopRatedAnimes';
-import UpcomingAnimes from '../components/UpComingAnimes';
+import Hero from '../components/templates/Hero';
+import Main from '../components/Templates/Main';
 
 const Home = () => {
   return (
-    <>
+    <div>
       <Hero />
-      <section className="p-5 text-white md:p-10">
-        <TopRatedAnimes />
-        <UpcomingAnimes />
-        <SeasonNow />
-      </section>
-    </>
+      <Main />
+    </div>
   );
 };
 

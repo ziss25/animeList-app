@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
-import HeroListShow from './HeroListShow';
-import { dataHeroListID } from '../data/data';
+import HeroListShow from '../Fragments/HeroListShow';
+import { dataHeroListID } from '../../data/data';
 
 const Hero = () => {
   const [data, setData] = useState(dataHeroListID);
