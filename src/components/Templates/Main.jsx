@@ -2,7 +2,7 @@ import React from 'react';
 import { fetchAnimesTopRated, fetchAnimesUpComing, fetchAnimesTopByFavorite } from '../../api/apiMyAnimeList';
 import MainAnimes from '../Fragments/mainAnimes';
 import SeasonNow from '../Fragments/SeasonNow';
-import Sidecards from './Sidecards';
+import Sidecards from '../Fragments/Sidecards';
 
 const Main = () => {
   return (
