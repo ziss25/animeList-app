@@ -1,10 +1,10 @@
-import Hero from '../components/Templates/Hero';
+import Heros from '../components/Templates/Heros';
 import Main from '../components/Templates/Main';
 
 const Home = () => {
   return (
     <div>
-      <Hero />
+      <Heros />
       <Main />
       {/* ntahlah kenapa ni */}
     </div>

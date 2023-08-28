@@ -5,7 +5,7 @@ import 'swiper/css';
 import HeroListShow from '../Fragments/HeroListShow';
 import { dataHeroListID } from '../../data/data';
 
-const Hero = () => {
+const Heros = () => {
   const [data, setData] = useState(dataHeroListID);
 
   return (
@@ -31,4 +31,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Heros;
