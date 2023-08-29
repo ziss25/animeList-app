@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchAnimesById } from '../api/apiMyAnimeList';
 import Star from '../components/Elements/Stars';
-import StarsLogo from '../components/Elements/starsLogo';
-import Title from '../components/Elements/Title';
+import StarsLogo from '../components/Elements/StarsLogo';
 import GlobalLoading from '../components/GlobalLoading';
 
 const PosterDetail = () => {
