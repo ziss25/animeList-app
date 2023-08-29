@@ -5,7 +5,7 @@ import 'swiper/css/navigation';
 import 'swiper/css';
 import SliderMarker from '../Elements/SliderMarker';
 import Title from '../Elements/Title';
-import { Skeleton } from '@mui/material';
+import SkeletonMainAnimes from '../Elements/SkeletonMainAnimes';
 
 const MainAnimes = ({ dataFetch, title, rated }) => {
   const [dataAnime, SetDataAnime] = useState([]);
@@ -49,11 +49,17 @@ const MainAnimes = ({ dataFetch, title, rated }) => {
         spaceBetween={10}
         className=""
       >
-        {dataAnime.map((data, index) => (
-          <SwiperSlide key={index}>
-            <Poster data={data} rated={rated} Isloading={Isloading} />
-          </SwiperSlide>
-        ))}
+        {Isloading
+          ? ['', '', '', '', '', '', ''].map((data, index) => (
+              <SwiperSlide key={index}>
+                <SkeletonMainAnimes />
+              </SwiperSlide>
+            ))
+          : dataAnime.map((data, index) => (
+              <SwiperSlide key={index}>
+                <Poster data={data} rated={rated} Isloading={Isloading} />
+              </SwiperSlide>
+            ))}
       </Swiper>
     </div>
   );
