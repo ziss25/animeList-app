@@ -6,14 +6,16 @@ import Sidecards from '../Fragments/Sidecards';
 
 const Main = () => {
   return (
-    <main className="p-5 text-white md:p-10 lg:relative">
-      <div className="relative lg:pr-[375px] 2xl:pr-[500px]">
-        <MainAnimes dataFetch={fetchAnimesTopRated} title="Top Rated" rated={true} />
-        <MainAnimes dataFetch={fetchAnimesUpComing} title="Up Coming" />
-        <Sidecards dataFetch={fetchAnimesTopByFavorite} title="Most Favorite" />
-      </div>
-      <SeasonNow />
-    </main>
+    <>
+      <main className="p-5 text-white md:p-10 lg:relative">
+        <div className="relative lg:pr-[375px] 2xl:pr-[500px]">
+          <MainAnimes dataFetch={fetchAnimesTopRated} title="Top Rated" rated={true} />
+          <MainAnimes dataFetch={fetchAnimesUpComing} title="Up Coming" />
+          <Sidecards dataFetch={fetchAnimesTopByFavorite} title="Most Favorite" />
+        </div>
+        <SeasonNow />
+      </main>
+    </>
   );
 };
 

@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { fetchAnimesSeasonNow } from '../../api/apiMyAnimeList';
 import Poster from '../Elements/Poster';
+import SkeletonMainAnimes from '../Elements/SkeletonMainAnimes';
 
 const SeasonNow = () => {
   const [data, setData] = useState([]);
+  const [Isloading, setIsLoading] = useState(true);
 
   const getAnimesSeasonNow = async () => {
-    const response = await fetchAnimesSeasonNow();
+    // cek local ada apa tidak ?
+    const response = JSON.parse(localStorage.getItem('localDataSeasonNow')) || (await fetchAnimesSeasonNow());
     setData(response.data);
+    // save data
+    sessionStorage.setItem('localDataSeasonNow', JSON.stringify(response));
   };
 
   useEffect(() => {
     getAnimesSeasonNow();
-    console.log(data);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
   }, []);
 
   return (

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Skeleton } from '@mui/material';
+import { Context } from '../../context/myContext';
 
-const Poster = ({ data, index, rated, Isloading }) => {
+const Poster = ({ data, index, rated }) => {
   const [title, setTitle] = useState('');
   const [img, setImg] = useState('');
   const [rating, setRating] = useState('');
+  const { setScrollPosition } = useContext(Context);
 
   const navigate = useNavigate();
 
@@ -17,7 +18,10 @@ const Poster = ({ data, index, rated, Isloading }) => {
 
   const handleCardClick = () => {
     const id = data.mal_id;
-    navigate(`/poster/${id}`);
+    navigate(`/poster/${id}`, { scroll: false });
+    setScrollPosition(window.scrollY);
+    // if user click poster maka kita akan arahkan posisi scroll nya top
+    window.scrollTo(0, 0);
   };
 
   useEffect(() => {

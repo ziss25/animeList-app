@@ -11,11 +11,19 @@ const MainAnimes = ({ dataFetch, title, rated }) => {
   const [dataAnime, SetDataAnime] = useState([]);
   const [Isloading, setIsLoading] = useState(true);
   const getAnimesTopRated = async () => {
-    const response = await dataFetch();
+    // const response = await dataFetch();
+    // SetDataAnime(response.data);
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 2000);
+    // cek local ada apa tidak ?
+
+    const response = JSON.parse(localStorage.getItem('localDataTopRated')) || (await dataFetch());
     SetDataAnime(response.data);
+    sessionStorage.setItem('localDataTopRated', JSON.stringify(response));
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 1000);
   };
 
   useEffect(() => {

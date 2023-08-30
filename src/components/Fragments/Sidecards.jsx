@@ -12,12 +12,21 @@ const Sidecards = ({ dataFetch, title }) => {
   const [arrSkeleton] = useState(['', '', '', '', '', '', '', '']);
 
   const getAnimesTopByFavorite = async () => {
-    const response = await dataFetch();
+    // const response = await dataFetch();
+    // SetDataAnime(response.data);
+    // setPagination(response.pagination);
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 3000);
+
+    const response = JSON.parse(localStorage.getItem('localDataSideCard')) || (await dataFetch());
     SetDataAnime(response.data);
-    setPagination(response.pagination);
+    // setPagination(response.pagination);
+    // save data
     setTimeout(() => {
+      sessionStorage.setItem('localDataSideCard', JSON.stringify(response));
       setIsLoading(false);
-    }, 3000);
+    }, 300);
   };
 
   useEffect(() => {

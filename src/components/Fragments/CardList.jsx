@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Star from '../Elements/Stars';
 
 const CardList = ({ data, isLoading }) => {
@@ -7,6 +8,8 @@ const CardList = ({ data, isLoading }) => {
   const [genre, setGenre] = useState([]);
   const [score, setScore] = useState('');
 
+  const navigate = useNavigate();
+
   const handleData = () => {
     setTitle(data.title);
     setImg(data.images.jpg.large_image_url);
@@ -14,13 +17,19 @@ const CardList = ({ data, isLoading }) => {
     setGenre(data.genres);
   };
 
+  const handleCardClick = () => {
+    const id = data.mal_id;
+    navigate(`/poster/${id}`, { scroll: false });
+    window.scrollTo(0, 0);
+  };
+
   useEffect(() => {
     handleData();
-  });
+  }, []);
 
   return (
     <>
-      <div className="card h-max mb-2">
+      <div className="card h-max mb-2" onClick={handleCardClick}>
         <div className="picture overflow-hidden rounded-md">
           <img src={img} />
         </div>
