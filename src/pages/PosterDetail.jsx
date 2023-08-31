@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { fetchAnimesById } from '../api/apiMyAnimeList';
+import { fetchAnimesById, fetchAnimesUpComing } from '../api/apiMyAnimeList';
 import Star from '../components/Elements/Stars';
 import StarsLogo from '../components/Elements/StarsLogo';
 import GlobalLoading from '../components/GlobalLoading';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Context } from '../context/myContext';
+import MainAnimes from '../components/Fragments/mainAnimes';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { fetchAnimesPicturesById } from '../api/apiMyAnimeList';
 
 const PosterDetail = () => {
   const { id } = useParams();
@@ -27,6 +30,7 @@ const PosterDetail = () => {
   const [studios, setStudios] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { scrollPosition } = useContext(Context);
+  const [pictures, setPictures] = useState([]);
 
   const getAnimesById = async () => {
     const response = await fetchAnimesById(id);
@@ -48,6 +52,11 @@ const PosterDetail = () => {
     stateLoading();
   };
 
+  const getPictures = async () => {
+    const response = await fetchAnimesPicturesById(id);
+    setPictures(response.data);
+  };
+
   const navigate = useNavigate();
 
   const stateLoading = () => {
@@ -56,15 +65,12 @@ const PosterDetail = () => {
 
   const handleCardClick = () => {
     navigate(`/`);
-    // if user click back maka kita akan arahkan posisi scroll nya seperti sebelumnya ia click poster nya
-    setTimeout(() => {
-      window.scrollTo(0, scrollPosition);
-    }, 100);
+    window.scrollTo(0, 700);
   };
 
   useEffect(() => {
     getAnimesById();
-    console.log(scrollPosition);
+    getPictures();
   }, [isLoading]);
 
   return (
@@ -92,7 +98,7 @@ const PosterDetail = () => {
                   </p>
                   <h1 className="text-lg md:text-4xl">{title}</h1>
                   <h4 className="text-md text-[#aeaeae] typograpy-oveflow--line1 md:text-xl">{titleEng}</h4>
-                  <ul className="taq flex gap-3 text-center justify-center md:justify-start mt-2">
+                  <ul className="taq flex gap-3 text-center scale-75 justify-center  mt-2 md:scale-100 md:justify-start">
                     {genres.map((data, index) => (
                       <li className="bg-[var(--primary)] inline-block px-2 py-1 rounded-md text-xs" key={index}>
                         {data.name}
@@ -141,6 +147,37 @@ const PosterDetail = () => {
               </div>
               <div className="mt-3 lg:mt-10">{trailer ? <iframe className="w-full h-[250px] md:h-[300px] lg:h-[400px]" src={trailer}></iframe> : <h1>not found</h1>}</div>
             </section>
+            {/* picture */}
+            <section className="cardsDetail_pictures mt-10">
+              <Swiper
+                slidesPerView={6}
+                breakpoints={{
+                  '@0.00': {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                  },
+                  '@0.75': {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                  },
+                  '@1.00': {
+                    slidesPerView: 5,
+                    spaceBetween: 20,
+                  },
+                  '@1.50': {
+                    slidesPerView: 6,
+                    spaceBetween: 20,
+                  },
+                }}
+                spaceBetween={10}
+              >
+                {pictures.map((data, index) => (
+                  <SwiperSlide key={index}>
+                    <img src={data.jpg.large_image_url} alt="" />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </section>
           </div>
         </>
       )}
@@ -149,4 +186,8 @@ const PosterDetail = () => {
 };
 
 export default PosterDetail;
-// border-b-8 border border-[var(--primary)]
+{
+  /* <section className="recomendation mt-10 mb-2">
+  <MainAnimes dataFetch={tes} id={21} reload={true} title="recomendation" />
+</section>; */
+}

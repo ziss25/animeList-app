@@ -32,7 +32,7 @@ const fetchAnimesById = (id) => {
   return makeRequestWithRetry(`${baseUrl}/anime/${id}`, maxRetries, delayBetweenRetries)
     .then((response) => response.json())
     .then((data) => data)
-    .catch((error) => error);
+    .catch((error) => erorr);
   // https://api.jikan.moe/v4/anime/{id}
 };
 
@@ -64,7 +64,21 @@ const fetchAnimesTopByFavorite = async () => {
     .catch((error) => error);
 };
 
-export { fetchAnimesTopRated, fetchAnimesUpComing, fetchAnimesSeasonNow, fetchAnimesById, fetchAnimesTopByFavorite };
+const fetchAnimesPicturesById = async (id) => {
+  return makeRequestWithRetry(`${baseUrl}/anime/${id}/pictures`, maxRetries, delayBetweenRetries)
+    .then((response) => response.json())
+    .then((data) => data)
+    .catch((error) => error);
+};
+
+// const tes = async (id) => {
+//   return makeRequestWithRetry(`https://api.jikan.moe/v4/anime/${id}/relations`, maxRetries, delayBetweenRetries)
+//     .then((response) => response.json())
+//     .then((data) => data)
+//     .catch((error) => error);
+// };
+
+export { fetchAnimesTopRated, fetchAnimesUpComing, fetchAnimesSeasonNow, fetchAnimesById, fetchAnimesTopByFavorite, fetchAnimesPicturesById };
 
 // kalo ada pesan ini .... walapaun erorr tapi ia reject dan request lagi
 // Failed to load resource: the server responded with a status of 429 (Too Many Requests)

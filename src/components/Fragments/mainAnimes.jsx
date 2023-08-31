@@ -7,24 +7,18 @@ import SliderMarker from '../Elements/SliderMarker';
 import Title from '../Elements/Title';
 import SkeletonMainAnimes from '../Elements/SkeletonMainAnimes';
 
-const MainAnimes = ({ dataFetch, title, rated }) => {
+const MainAnimes = ({ dataFetch, title, rated, reload }) => {
   const [dataAnime, SetDataAnime] = useState([]);
   const [Isloading, setIsLoading] = useState(true);
-  const getAnimesTopRated = async () => {
-    // const response = await dataFetch();
-    // SetDataAnime(response.data);
-    // setTimeout(() => {
-    //   setIsLoading(false);
-    // }, 2000);
-    // cek local ada apa tidak ?
 
-    const response = JSON.parse(localStorage.getItem('localDataTopRated')) || (await dataFetch());
+  const getAnimesTopRated = async () => {
+    const response = await dataFetch();
     SetDataAnime(response.data);
-    sessionStorage.setItem('localDataTopRated', JSON.stringify(response));
     setTimeout(() => {
+      // off skeleton
       setIsLoading(false);
     }, 1000);
-  };
+  }; //
 
   useEffect(() => {
     getAnimesTopRated();

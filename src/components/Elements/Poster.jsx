@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../../context/myContext';
 
-const Poster = ({ data, index, rated }) => {
+const Poster = ({ data, index, rated, reload }) => {
   const [title, setTitle] = useState('');
   const [img, setImg] = useState('');
   const [rating, setRating] = useState('');
@@ -18,6 +18,7 @@ const Poster = ({ data, index, rated }) => {
 
   const handleCardClick = () => {
     const id = data.mal_id;
+    console.log(id);
     navigate(`/poster/${id}`, { scroll: false });
     setScrollPosition(window.scrollY);
     // if user click poster maka kita akan arahkan posisi scroll nya top
