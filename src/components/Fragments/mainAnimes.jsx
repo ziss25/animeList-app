@@ -7,7 +7,7 @@ import SliderMarker from '../Elements/SliderMarker';
 import Title from '../Elements/Title';
 import SkeletonMainAnimes from '../Elements/SkeletonMainAnimes';
 
-const MainAnimes = ({ dataFetch, title, rated, reload }) => {
+const MainAnimes = ({ dataFetch, title, rated }) => {
   const [dataAnime, SetDataAnime] = useState([]);
   const [Isloading, setIsLoading] = useState(true);
 
@@ -15,10 +15,9 @@ const MainAnimes = ({ dataFetch, title, rated, reload }) => {
     const response = await dataFetch();
     SetDataAnime(response.data);
     setTimeout(() => {
-      // off skeleton
       setIsLoading(false);
     }, 1000);
-  }; //
+  };
 
   useEffect(() => {
     getAnimesTopRated();

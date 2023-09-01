@@ -1,32 +1,40 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import Button from '../Elements/Button';
 import Title from '../Elements/Title';
 import CardList from '../Fragments/CardList';
 import SkeletonMostFavorite from '../Elements/SkeletonMostFavorite';
 
 const Sidecards = ({ dataFetch, title }) => {
   const [dataAnime, SetDataAnime] = useState([]);
-  const [pagination, setPagination] = useState('');
+  const [count, setCount] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const [text, setText] = useState('load more');
   const [arrSkeleton] = useState(['', '', '', '', '', '', '', '']);
 
   const getAnimesTopByFavorite = async () => {
-    const response = await dataFetch();
-    SetDataAnime(response.data);
-    setPagination(response.pagination);
+    const response = await dataFetch(count);
+    SetDataAnime([...dataAnime, ...response.data]);
+    setText('load more');
+    // setPagination(response.pagination);
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);
   };
 
+  const handleLoadMore = () => {
+    setText('loading...');
+    setCount(count + 1);
+  };
+
   useEffect(() => {
     getAnimesTopByFavorite();
-  }, []);
+    // console.log(count);
+    console.log(dataAnime);
+  }, [count]);
 
   return (
     <>
-      <div className="hidden absolute top-0 mx-4 px-4 right-2 w-[330px] h-[95%] overflow-auto flex-col gap-2 lg:flex 2xl:w-[400px] p-3">
+      <div className="hidden absolute top-0  px-4 right-2 w-[330px] h-[95%] overflow-auto flex-col gap-2 lg:flex 2xl:w-[400px] p-3">
         <Title title={title} style="mb-5 text-xl font-bold border-b-4 pb-1 border-[var(--primary)] inline-block text-center" />
 
         <div className="overflow-auto border-l overflow-x-hidden border-stone-700">
@@ -37,7 +45,9 @@ const Sidecards = ({ dataFetch, title }) => {
               dataAnime.map((data, index) => <CardList key={index} data={data} />)}
         </div>
 
-        <Button children="load more" />
+        <button className="px-6 py-1 font-semibold rounded-md text-sm bg-[var(--primary)] md:text-md md:px-8 2xl:text-lg 2xl:px-10 2xl:py-2 2xl:translate-y-1" onClick={handleLoadMore}>
+          {text}
+        </button>
       </div>
     </>
   );

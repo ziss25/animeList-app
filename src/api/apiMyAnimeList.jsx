@@ -50,15 +50,15 @@ const fetchAnimesUpComing = async () => {
     .catch((error) => error);
 };
 
-const fetchAnimesSeasonNow = async () => {
-  return makeRequestWithRetry(`${baseUrl}/seasons/now`, maxRetries, delayBetweenRetries)
+const fetchAnimesSeasonNow = async (number) => {
+  return makeRequestWithRetry(`https://api.jikan.moe/v4/seasons/now?page=${number}&sfw=true&filter=tv`, maxRetries, delayBetweenRetries)
     .then((response) => response.json())
     .then((data) => data)
     .catch((error) => error);
 };
 
-const fetchAnimesTopByFavorite = async () => {
-  return makeRequestWithRetry(`${baseUrl}/top/anime?filter=favorite`, maxRetries, delayBetweenRetries)
+const fetchAnimesTopByFavorite = async (number) => {
+  return makeRequestWithRetry(`${baseUrl}/top/anime?filter=favorite&page=${number}`, maxRetries, delayBetweenRetries)
     .then((response) => response.json())
     .then((data) => data)
     .catch((error) => error);

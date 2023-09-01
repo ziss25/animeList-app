@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Star from '../Elements/Stars';
 
-const CardList = ({ data, isLoading }) => {
+const CardList = ({ data }) => {
   const [img, setImg] = useState('');
   const [title, setTitle] = useState('');
   const [genre, setGenre] = useState([]);
@@ -50,9 +50,3 @@ const CardList = ({ data, isLoading }) => {
 };
 
 export default CardList;
-
-{
-  /* <Skeleton sx={{ bgcolor: '#aeaeae' }} />
-<Skeleton sx={{ bgcolor: '#aeaeae' }} />
-<Skeleton width={80} sx={{ bgcolor: '#aeaeae' }} /> */
-}

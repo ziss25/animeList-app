@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../../context/myContext';
 
-const Poster = ({ data, index, rated, reload }) => {
+const Poster = ({ data, index, rated, sidecards }) => {
   const [title, setTitle] = useState('');
   const [img, setImg] = useState('');
   const [rating, setRating] = useState('');
@@ -21,7 +21,6 @@ const Poster = ({ data, index, rated, reload }) => {
     console.log(id);
     navigate(`/poster/${id}`, { scroll: false });
     setScrollPosition(window.scrollY);
-    // if user click poster maka kita akan arahkan posisi scroll nya top
     window.scrollTo(0, 0);
   };
 
@@ -31,7 +30,7 @@ const Poster = ({ data, index, rated, reload }) => {
 
   return (
     <>
-      <div key={index} className="poster animeRatedList h-max max-w-xs flex flex-col justify-center items-center relative" onClick={handleCardClick}>
+      <div key={index} className="poster  animeRatedList h-max max-w-xs flex flex-col justify-center items-center relative" onClick={handleCardClick}>
         {rated ? (
           <div className="absolute top-0 -left-1 bg-[var(--primary)] px-3 scale-75 py-1 flex items-center rounded-full text-sm gap-2">
             <p className="">{rating}</p>
