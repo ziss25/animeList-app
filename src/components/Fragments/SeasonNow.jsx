@@ -1,7 +1,7 @@
-import { CircularProgress, Pagination, Stack } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useDeferredValue } from 'react';
 import { fetchAnimesSeasonNow } from '../../api/apiMyAnimeList';
+import { CustomPagination } from '../../utils/CustomMui';
 import Poster from '../Elements/Poster';
 
 const SeasonNow = () => {
@@ -14,14 +14,12 @@ const SeasonNow = () => {
     const response = await fetchAnimesSeasonNow(currentPage);
     setTotalPage(response.pagination.last_visible_page);
     setData(response.data);
-    // console.log(totalPage);
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
   };
 
-  const handlePageChange = (event) => {
-    const value = event.target.innerText;
+  const handlePageChange = (event, value) => {
     setIsLoading(true);
     setCurrentPage(value);
   };
@@ -34,6 +32,7 @@ const SeasonNow = () => {
     <>
       <div className="recomendation-Anime mt-10">
         <h1 className="mb-5 text-xl font-bold border-b-4 pb-1 border-[var(--primary)] inline-block">Season Now</h1>
+
         {Isloading ? (
           <div className="scale-50 flex justify-center">
             <CircularProgress />
@@ -47,8 +46,14 @@ const SeasonNow = () => {
             ))}
           </div>
         )}
-        <div className=" flex justify-center">
-          <Pagination count={3} shape="rounded" color="primary" sx={{ backgroundColor: 'white' }} onChange={handlePageChange} hidePrevButton={true} hideNextButton={true} />
+
+        <div className=" flex justify-center mt-3">
+          <CustomPagination
+            count={totalPage} //
+            variant="outlined"
+            shape="rounded"
+            onChange={handlePageChange}
+          />
         </div>
       </div>
     </>

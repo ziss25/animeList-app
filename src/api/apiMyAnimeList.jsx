@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const maxRetries = 3; // Maximum number of retry attempts
-const delayBetweenRetries = 3000; // Delay in milliseconds before retrying (3 seconds)
+const delayBetweenRetries = 1000; // Delay in milliseconds before retrying (3 seconds)
 const baseUrl = 'https://api.jikan.moe/v4';
 
 // promises handle -- limit request
@@ -71,14 +71,21 @@ const fetchAnimesPicturesById = async (id) => {
     .catch((error) => error);
 };
 
-// const tes = async (id) => {
-//   return makeRequestWithRetry(`https://api.jikan.moe/v4/anime/${id}/relations`, maxRetries, delayBetweenRetries)
-//     .then((response) => response.json())
-//     .then((data) => data)
-//     .catch((error) => error);
-// };
+const fetchAnimesSearch = async (query, type) => {
+  if (type === 'all') {
+    return makeRequestWithRetry(`${baseUrl}/anime?q=${query}&sfw=true`, maxRetries, delayBetweenRetries)
+      .then((response) => response.json())
+      .then((data) => data)
+      .catch((error) => error);
+  } else {
+    return makeRequestWithRetry(`${baseUrl}/anime?q=${query}&sfw=true&type=${type}`, maxRetries, delayBetweenRetries)
+      .then((response) => response.json())
+      .then((data) => data)
+      .catch((error) => error);
+  }
+};
 
-export { fetchAnimesTopRated, fetchAnimesUpComing, fetchAnimesSeasonNow, fetchAnimesById, fetchAnimesTopByFavorite, fetchAnimesPicturesById };
+export { fetchAnimesTopRated, fetchAnimesUpComing, fetchAnimesSeasonNow, fetchAnimesById, fetchAnimesTopByFavorite, fetchAnimesPicturesById, fetchAnimesSearch };
 
 // kalo ada pesan ini .... walapaun erorr tapi ia reject dan request lagi
 // Failed to load resource: the server responded with a status of 429 (Too Many Requests)

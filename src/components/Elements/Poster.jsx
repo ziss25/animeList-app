@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../../context/myContext';
 
-const Poster = ({ data, index, rated, sidecards }) => {
+const Poster = ({ data, index, rated }) => {
   const [title, setTitle] = useState('');
   const [img, setImg] = useState('');
   const [rating, setRating] = useState('');
