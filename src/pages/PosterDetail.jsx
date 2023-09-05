@@ -67,13 +67,12 @@ const PosterDetail = () => {
   };
 
   const handleCardClick = () => {
+    console.log('click');
+    console.log(to);
     if (to === 'backToSearch') {
       navigate(`/search`);
       window.scrollTo(0, 0);
     } else if (to === 'backToHome') {
-      navigate(`/`);
-      window.scrollTo(0, 700);
-    } else {
       navigate(`/`);
       window.scrollTo(0, 700);
     }
@@ -82,9 +81,9 @@ const PosterDetail = () => {
   useEffect(() => {
     getAnimesById();
     getPictures();
-    if (!location) {
-      setTo(location.state.to);
-    }
+    // if (!location) {
+    setTo(location.state.to);
+    // }
   }, [isLoading]);
 
   return (
