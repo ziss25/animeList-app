@@ -19,7 +19,7 @@ const CardList = ({ data }) => {
 
   const handleCardClick = () => {
     const id = data.mal_id;
-    navigate(`/poster/${id}`, { scroll: false });
+    navigate(`/poster/${id}`, { state: { to: 'backToHome' } });
     window.scrollTo(0, 0);
   };
 
@@ -29,7 +29,7 @@ const CardList = ({ data }) => {
 
   return (
     <>
-      <div className="card h-max mb-2" onClick={handleCardClick}>
+      <div className="myCards h-max mb-2" onClick={handleCardClick}>
         <div className="picture overflow-hidden rounded-md">
           <img src={img} />
         </div>

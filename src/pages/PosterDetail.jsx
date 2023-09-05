@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { fetchAnimesById, fetchAnimesUpComing } from '../api/apiMyAnimeList';
 import Star from '../components/Elements/Stars';
 import StarsLogo from '../components/Elements/StarsLogo';
@@ -31,6 +31,9 @@ const PosterDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { scrollPosition } = useContext(Context);
   const [pictures, setPictures] = useState([]);
+  const [to, setTo] = useState('');
+
+  const location = useLocation();
 
   const getAnimesById = async () => {
     const response = await fetchAnimesById(id);
@@ -64,13 +67,24 @@ const PosterDetail = () => {
   };
 
   const handleCardClick = () => {
-    navigate(`/`);
-    window.scrollTo(0, 700);
+    if (to === 'backToSearch') {
+      navigate(`/search`);
+      window.scrollTo(0, 0);
+    } else if (to === 'backToHome') {
+      navigate(`/`);
+      window.scrollTo(0, 700);
+    } else {
+      navigate(`/`);
+      window.scrollTo(0, 700);
+    }
   };
 
   useEffect(() => {
     getAnimesById();
     getPictures();
+    if (!location) {
+      setTo(location.state.to);
+    }
   }, [isLoading]);
 
   return (

@@ -21,14 +21,13 @@ export const CustomPagination = styled(Pagination)(({ theme }) => ({
 
 export const CustomTextField = styled(TextField)(({ theme }) => ({
   '& .MuiInputBase-input': {
-    backgroundColor: '#3f3f46', // Ubah warna latar belakang input
+    // backgroundColor: '#3f3f46', // Ubah warna latar belakang input
     borderRadius: theme.spacing(1), // Tambahkan radius sudut input
-    padding: theme.spacing(0), // Tambahkan padding pada input
     color: 'white',
     fontWeight: 'bold',
   },
   '& .MuiInputBase-input:hover': {
-    backgroundColor: '#52525b', // Ubah warna latar belakang saat hover
+    // backgroundColor: '#52525b', // Ubah warna latar belakang saat hover
   },
   '& .MuiInputLabel-root': {
     color: 'white', // Ubah warna label

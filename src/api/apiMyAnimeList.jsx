@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const maxRetries = 3; // Maximum number of retry attempts
-const delayBetweenRetries = 1000; // Delay in milliseconds before retrying (3 seconds)
+const delayBetweenRetries = 3000; // Delay in milliseconds before retrying (3 seconds)
 const baseUrl = 'https://api.jikan.moe/v4';
 
 // promises handle -- limit request
@@ -72,7 +72,7 @@ const fetchAnimesPicturesById = async (id) => {
 };
 
 const fetchAnimesSearch = async (query, type) => {
-  if (type === 'all') {
+  if (type === 'all' || type === '') {
     return makeRequestWithRetry(`${baseUrl}/anime?q=${query}&sfw=true`, maxRetries, delayBetweenRetries)
       .then((response) => response.json())
       .then((data) => data)

@@ -19,7 +19,7 @@ const Poster = ({ data, index, rated }) => {
   const handleCardClick = () => {
     const id = data.mal_id;
     console.log(id);
-    navigate(`/poster/${id}`, { scroll: false });
+    navigate(`/poster/${id}`, { state: { to: 'backToHome' } });
     setScrollPosition(window.scrollY);
     window.scrollTo(0, 0);
   };

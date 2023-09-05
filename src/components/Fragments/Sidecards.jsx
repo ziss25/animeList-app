@@ -34,10 +34,10 @@ const Sidecards = ({ dataFetch, title }) => {
 
   return (
     <>
-      <div className="hidden  absolute top-0  px-4 right-2 w-[330px] h-[90%] overflow-auto flex-col gap-2 lg:flex 2xl:w-[450px] p-3">
+      <div className="hidden absolute top-0  px-4 right-2 w-[330px] h-[90%] overflow-auto flex-col gap-2 lg:flex 2xl:w-[450px] p-3">
         <Title title={title} style="mb-5 text-xl font-bold border-b-4 pb-1 border-[var(--primary)] inline-block text-center" />
 
-        <div className="overflow-auto border-l pl-5 overflow-x-hidden border-stone-700">
+        <div className="overflow-auto  border-l pl-5 overflow-x-hidden border-stone-700">
           {isLoading
             ? // data loading
               arrSkeleton.map((data, index) => <SkeletonMostFavorite key={index} />)

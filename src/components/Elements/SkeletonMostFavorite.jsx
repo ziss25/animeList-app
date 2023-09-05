@@ -3,7 +3,7 @@ import { Skeleton } from '@mui/material';
 
 const SkeletonMostFavorite = () => {
   return (
-    <div className="card flex ml-2">
+    <div className="myCards flex ml-2">
       <div className="">
         <Skeleton width={80} height={130} sx={{ bgcolor: '#aeaeae' }} />
       </div>
