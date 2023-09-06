@@ -75,6 +75,8 @@ const PosterDetail = () => {
     } else if (to === 'backToHome') {
       navigate(`/`);
       window.scrollTo(0, 700);
+    } else if (to === 'backToSeason') {
+      navigate(`/season`);
     }
   };
 

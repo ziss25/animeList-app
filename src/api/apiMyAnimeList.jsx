@@ -71,21 +71,36 @@ const fetchAnimesPicturesById = async (id) => {
     .catch((error) => error);
 };
 
-const fetchAnimesSearch = async (query, type) => {
-  if (type === 'all' || type === '') {
-    return makeRequestWithRetry(`${baseUrl}/anime?q=${query}&sfw=true`, maxRetries, delayBetweenRetries)
-      .then((response) => response.json())
-      .then((data) => data)
-      .catch((error) => error);
-  } else {
-    return makeRequestWithRetry(`${baseUrl}/anime?q=${query}&sfw=true&type=${type}`, maxRetries, delayBetweenRetries)
-      .then((response) => response.json())
-      .then((data) => data)
-      .catch((error) => error);
-  }
+const fetchAnimesSeasonsList = async () => {
+  return makeRequestWithRetry(`${baseUrl}/seasons`, maxRetries, delayBetweenRetries)
+    .then((response) => response.json())
+    .then((data) => data)
+    .catch((error) => error);
 };
 
-export { fetchAnimesTopRated, fetchAnimesUpComing, fetchAnimesSeasonNow, fetchAnimesById, fetchAnimesTopByFavorite, fetchAnimesPicturesById, fetchAnimesSearch };
+const fetchAnimesSeasons = async (years, season, currentPage) => {
+  return makeRequestWithRetry(`${baseUrl}/seasons/${years}/${season}?page=${currentPage}&sfw=true`, maxRetries, delayBetweenRetries)
+    .then((response) => response.json())
+    .then((data) => data)
+    .catch((error) => error);
+};
+
+// khusus ini ada di dalam file search page nya
+// const fetchAnimesSearch = async (query, type) => {
+//   if (type === 'all' || type === '') {
+//     return makeRequestWithRetry(`${baseUrl}/anime?q=${query}&sfw=true`, maxRetries, delayBetweenRetries)
+//       .then((response) => response.json())
+//       .then((data) => data)
+//       .catch((error) => error);
+//   } else {
+//     return makeRequestWithRetry(`${baseUrl}/anime?q=${query}&sfw=true&type=${type}`, maxRetries, delayBetweenRetries)
+//       .then((response) => response.json())
+//       .then((data) => data)
+//       .catch((error) => error);
+//   }
+// };
+
+export { fetchAnimesTopRated, fetchAnimesUpComing, fetchAnimesSeasonNow, fetchAnimesById, fetchAnimesTopByFavorite, fetchAnimesPicturesById, fetchAnimesSeasonsList, fetchAnimesSeasons };
 
 // kalo ada pesan ini .... walapaun erorr tapi ia reject dan request lagi
 // Failed to load resource: the server responded with a status of 429 (Too Many Requests)

@@ -12,8 +12,8 @@ export default function Navbar({ mode }) {
             <CustomLink mode={mode} to="/popular">
               popular
             </CustomLink>
-            <CustomLink mode={mode} to="/comingSoon">
-              coming Soon
+            <CustomLink mode={mode} to="/season">
+              season
             </CustomLink>
             <CustomLink mode={mode} to="/search">
               search
@@ -30,9 +30,9 @@ export default function Navbar({ mode }) {
             <i className="fa fa-fire" aria-hidden="true"></i>
             <h3>popular</h3>
           </CustomLink>
-          <CustomLink to="/comingSoon">
+          <CustomLink to="/season">
             <i className="fa fa-calendar" aria-hidden="true"></i>
-            <h3>Upcoming</h3>
+            <h3>season</h3>
           </CustomLink>
           <CustomLink to="/search">
             <i className="fa fa-search" aria-hidden="true"></i>

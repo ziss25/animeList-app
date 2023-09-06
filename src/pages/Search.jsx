@@ -2,45 +2,54 @@ import { Autocomplete } from '@mui/material';
 import { Stack } from '@mui/system';
 import React, { useContext, useEffect, useState } from 'react';
 import { CustomTextField } from '../utils/CustomMui';
-import { fetchAnimesSearch } from '../api/apiMyAnimeList';
 import { useNavigate } from 'react-router-dom';
 import { Context } from '../context/myContext';
+import axios from 'axios';
 
 const Search = () => {
-  // const [querySearch, setQuerySearch] = useState('');
   const [dataResult, setDataResult] = useState([]);
   const [type, setType] = useState('');
   const { querySearch, setQuerySearch } = useContext(Context);
   const navigate = useNavigate();
 
+  let searchTimer; // Timer untuk penundaan
   const typeCategory = [{ label: 'all' }, { label: 'tv' }, { label: 'movie' }, { label: 'special' }, { label: 'ona' }, { label: 'ova' }];
 
-  const getAnimesSearch = async () => {
-    const response = await fetchAnimesSearch(querySearch, type);
-    // console.log({ querySearch, type });
-    setDataResult(response.data ?? []);
+  const getAnimesSearch = () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(async () => {
+      try {
+        const response = await axios(`https://api.jikan.moe/v4/anime?q=${querySearch}&sfw=true${type}`);
+        setDataResult(response.data.data);
+      } catch (error) {
+        clearTimeout(searchTimer);
+      }
+    }, 1000);
   };
+
+  getAnimesSearch();
 
   // mengambil value berdasarkan kita click item di option nya
   const handleOptionClick = (event, value) => {
     setQuerySearch(value);
-    getAnimesSearch();
-    console.log(value);
   };
 
   const handleTypeClick = (event, value) => {
-    setType(event.target.value);
+    if (event.target.value === 'all') {
+      setType('');
+    } else {
+      setType(`&type=${event.target.value}`);
+    }
   };
 
   // value dari inpur user
   const handleInputUser = (e) => {
-    setTimeout(() => {
-      setQuerySearch(e.target.value);
-    }, 1000);
+    setQuerySearch(e.target.value);
   };
 
   useEffect(() => {
     getAnimesSearch();
+    console.log(type);
   }, [querySearch, type]);
 
   return (
@@ -74,7 +83,7 @@ const Search = () => {
           </Stack>
         </div>
         <div className="w-full md:w-3/12 mt-5 md:mt-0">
-          <select className="select  w-full h-full" value={type} onChange={handleTypeClick}>
+          <select className="select  w-full h-full" onChange={handleTypeClick}>
             {typeCategory.map((type, index) => (
               <option>{type.label}</option>
             ))}

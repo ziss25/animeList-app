@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { bgOnePiece, bgDemonSLayer, bgNaruto, bgJujutsu, bgChainsawMan } from '../../assets/index-img';
 import Star from '../Elements/Stars';
 
@@ -9,6 +9,7 @@ const HeroListShow = ({ listID }) => {
   const [score, setScore] = useState('');
   const [synopsis, setSynopsis] = useState('');
   const [bg, setBg] = useState('');
+  const navigate = useNavigate();
 
   const getDetailAnimeByID = async () => {
     const data = await axios.get(`https://api.jikan.moe/v4/anime/${listID}`);
@@ -58,8 +59,14 @@ const HeroListShow = ({ listID }) => {
             <span>10</span>
           </div>
         </div>
-        <button className="px-6 py-2 font-semibold rounded-sm text-sm bg-[var(--primary)] md:text-md md:px-10 2xl:text-lg 2xl:px-14 2xl:py-2 2xl:translate-y-1">
-          <Link to={`/poster/${listID}`}>detail</Link>
+        <button
+          className="px-6 py-2 font-semibold rounded-sm text-sm bg-[var(--primary)] md:text-md md:px-10 2xl:text-lg 2xl:px-14 2xl:py-2 2xl:translate-y-1"
+          onClick={() => {
+            window.scrollTo(0, 0);
+            navigate(`/poster/${listID}`, { state: { to: 'backToHome' } });
+          }}
+        >
+          detail
         </button>
       </div>
     </div>

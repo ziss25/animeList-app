@@ -6,6 +6,10 @@ const Provider = ({ children }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   // as inputUser search
   const [querySearch, setQuerySearch] = useState('');
+  // as page season
+  const [years, setYears] = useState('2023');
+  const [season, setSeason] = useState('fall');
+
   return (
     <Context.Provider
       value={{
@@ -15,6 +19,10 @@ const Provider = ({ children }) => {
         setScrollPosition,
         querySearch,
         setQuerySearch,
+        years,
+        setYears,
+        season,
+        setSeason,
       }}
     >
       {children}
