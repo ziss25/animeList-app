@@ -51,7 +51,7 @@ const Season = () => {
 
   return (
     <div className="min-h-screen mt-16 px-5 max-w-3xl  mx-auto">
-      <Title title="season" style={'mb-5 text-xl font-bold border-b-4 pb-1 border-[var(--primary)] inline-block'} />
+      <Title title="season" style={'mb-5 text-xl text-white font-bold border-b-4 pb-1 border-[var(--primary)] inline-block'} />
       <div className="grop-category flex gap-5  justify-between">
         <select className="select select-bordered select w-full max-w-xs" onChange={handleSeasonListSeason}>
           <option disabled selected>
