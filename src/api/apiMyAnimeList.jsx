@@ -85,6 +85,20 @@ const fetchAnimesSeasons = async (years, season, currentPage) => {
     .catch((error) => error);
 };
 
+const fetchAnimesbgFilter = async (filter = '', currentPage) => {
+  let url;
+  if (filter === '') {
+    url = `${baseUrl}/top/anime?page=${currentPage}&sfw=true`;
+  } else {
+    url = `${baseUrl}/top/anime${filter}&page=${currentPage}&sfw=true`;
+  }
+  // console.log(url);
+  return makeRequestWithRetry(url, maxRetries, delayBetweenRetries)
+    .then((response) => response.json())
+    .then((data) => data)
+    .catch((error) => error);
+};
+
 // khusus ini ada di dalam file search page nya
 // const fetchAnimesSearch = async (query, type) => {
 //   if (type === 'all' || type === '') {
@@ -100,7 +114,7 @@ const fetchAnimesSeasons = async (years, season, currentPage) => {
 //   }
 // };
 
-export { fetchAnimesTopRated, fetchAnimesUpComing, fetchAnimesSeasonNow, fetchAnimesById, fetchAnimesTopByFavorite, fetchAnimesPicturesById, fetchAnimesSeasonsList, fetchAnimesSeasons };
+export { fetchAnimesTopRated, fetchAnimesUpComing, fetchAnimesSeasonNow, fetchAnimesById, fetchAnimesTopByFavorite, fetchAnimesPicturesById, fetchAnimesSeasonsList, fetchAnimesSeasons, fetchAnimesbgFilter };
 
 // kalo ada pesan ini .... walapaun erorr tapi ia reject dan request lagi
 // Failed to load resource: the server responded with a status of 429 (Too Many Requests)

@@ -68,6 +68,12 @@ html {
   gap: 10px;
 }
 
+.myCardsTop {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 16px;
+}
+
 /* custom style navigation swiper */
 /* .swiper-button-next,
 .swiper-button-prev {

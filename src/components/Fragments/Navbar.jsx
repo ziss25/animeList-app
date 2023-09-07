@@ -9,8 +9,8 @@ export default function Navbar({ mode }) {
             <CustomLink mode={mode} to="/">
               Home
             </CustomLink>
-            <CustomLink mode={mode} to="/popular">
-              popular
+            <CustomLink mode={mode} to="/top">
+              Top
             </CustomLink>
             <CustomLink mode={mode} to="/season">
               season
@@ -26,9 +26,9 @@ export default function Navbar({ mode }) {
             <i className="fa fa-home text-xl" aria-hidden="true"></i>
             <h3>Home</h3>
           </CustomLink>
-          <CustomLink to="/popular">
+          <CustomLink to="/top">
             <i className="fa fa-fire" aria-hidden="true"></i>
-            <h3>popular</h3>
+            <h3>Top</h3>
           </CustomLink>
           <CustomLink to="/season">
             <i className="fa fa-calendar" aria-hidden="true"></i>

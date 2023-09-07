@@ -12,7 +12,8 @@ const Season = () => {
   const [seasonList, setSeasonList] = useState([]);
   const { years, setYears, season, setSeason } = useContext(Context);
   const [data, setData] = useState([]);
-  const [Isloading, setIsLoading] = useState(true);
+  const [loadingPagination, setloadingPagination] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
@@ -26,21 +27,24 @@ const Season = () => {
     const response = await fetchAnimesSeasons(years, season, currentPage);
     setData(response.data);
     setTotalPage(response.pagination.last_visible_page);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+    setloadingPagination(false);
+    setLoading(false);
   };
 
   const handleSeasonListYear = (event) => {
     setYears(event.target.value);
+    setLoading(true);
+    setCurrentPage(1);
   };
 
   const handleSeasonListSeason = (event) => {
     setSeason(event.target.value);
+    setLoading(true);
+    setCurrentPage(1);
   };
 
   const handlePageChange = (event, value) => {
-    setIsLoading(true);
+    setloadingPagination(true);
     setCurrentPage(value);
   };
 
@@ -73,44 +77,52 @@ const Season = () => {
         </select>
       </div>
 
-      <section className="grid  relative grid-cols-2 gap-5 mt-10 md:grid-cols-4 lg:grid-cols-5 lg:gap-8">
-        {Isloading ? (
-          <div className="scale-50 flex  top-0 right-0 left-0 bottom-0 absolute justify-center">
-            <CircularProgress />
-          </div>
-        ) : (
-          data.map((anime, index) => (
-            <div
-              key={index}
-              className="lg:cursor-pointer lg:hover:scale-110 transition-all duration-500"
-              onClick={() => {
-                window.scrollTo(0, 0);
-                navigate(`/poster/${anime.mal_id}`, { state: { to: 'backToSeason' } });
-              }}
-            >
-              <div className="poster text-white animeRatedList h-max max-w-xs flex flex-col justify-center items-center relative">
-                <div className="rounded-md overflow-hidden h-full">
-                  <img className="object-cover" src={anime.images.jpg.large_image_url} alt="" />
-                </div>
-                <div className="poster__body typograpy-overflow-title p-3 flex items-center justify-center w-full">
-                  <h1 className="typograpy-overflow-title text-center font-extrabold">{anime.title}</h1>
-                </div>
-              </div>
-            </div>
-          ))
-        )}
-      </section>
-
-      {data.length !== 0 ? (
-        <div className=" flex justify-center mt-10">
-          <CustomPagination
-            count={totalPage} //
-            variant="outlined"
-            shape="rounded"
-            onChange={handlePageChange}
-          />
+      {loading ? (
+        <div className="flex justify-center mt-20 md:mt-32 scale-75">
+          <CircularProgress />
         </div>
-      ) : null}
+      ) : (
+        <>
+          <section className="grid relative grid-cols-2 gap-5 mt-10 md:grid-cols-4 lg:grid-cols-5 lg:gap-8">
+            {loadingPagination ? (
+              <div className="scale-50 flex  top-0 right-0 left-0 bottom-0 absolute justify-center">
+                <CircularProgress />
+              </div>
+            ) : (
+              data.map((anime, index) => (
+                <div
+                  key={index}
+                  className="lg:cursor-pointer lg:hover:scale-110 transition-all duration-500"
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    navigate(`/poster/${anime.mal_id}`, { state: { to: 'backToSeason' } });
+                  }}
+                >
+                  <div className="poster text-white animeRatedList h-max max-w-xs flex flex-col justify-center items-center relative">
+                    <div className="rounded-md overflow-hidden h-full">
+                      <img className="object-cover" src={anime.images.jpg.large_image_url} alt="" />
+                    </div>
+                    <div className="poster__body typograpy-overflow-title p-3 flex items-center justify-center w-full">
+                      <h1 className="typograpy-overflow-title text-center font-extrabold">{anime.title}</h1>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
+          </section>
+
+          {data.length !== 0 ? (
+            <div className=" flex justify-center mt-10">
+              <CustomPagination
+                count={totalPage} //
+                variant="outlined"
+                shape="rounded"
+                onChange={handlePageChange}
+              />
+            </div>
+          ) : null}
+        </>
+      )}
     </div>
   );
 };
