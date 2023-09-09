@@ -4,6 +4,7 @@ import Button from '../Elements/Button';
 import HambButton from '../Elements/HambButton';
 import LogoTitle from '../Elements/LogoTitle';
 import Navbar from '../Fragments/Navbar';
+// import test from '../../assets/avatar/test.jpg';
 
 const Headers = () => {
   const [isScrollbg, setisScrollbg] = useState(false);
@@ -24,6 +25,8 @@ const Headers = () => {
         <LogoTitle style="text-xl md:text-2xl 2xl:text-3xl" />
       </div>
       <Navbar mode="desktop" />
+      {/* jika ntar nanti mau adain fitur avatar border */}
+      {/* <img src={test} width={40} /> */}
       <Button children="login" />
     </div>
   );

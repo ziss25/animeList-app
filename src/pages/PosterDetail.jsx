@@ -67,8 +67,6 @@ const PosterDetail = () => {
   };
 
   const handleCardClick = () => {
-    console.log('click');
-    console.log(to);
     if (to === 'backToSearch') {
       navigate(`/search`);
       window.scrollTo(0, 0);

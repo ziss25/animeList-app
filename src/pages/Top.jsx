@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Top = () => {
   const [data, setdata] = useState([]);
-  const [filter, setfilter] = useState('rank'); // default "" as rank
+  const [filter, setfilter] = useState('favorite'); // default "" as rank
   const [isLoading, setisLoading] = useState(true);
   const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,7 +41,6 @@ const Top = () => {
   const handlePageChange = (event, value) => {
     setloadingPagination(true);
     setCurrentPage(value);
-    console.log(value);
   };
 
   useEffect(() => {
@@ -99,13 +98,13 @@ const Top = () => {
                 {data.map((anime, index) => (
                   <div
                     key={index}
-                    className="myCardsTop mb-5"
+                    className="myCardsTop mb-5 relative cursor-pointer"
                     onClick={() => {
                       window.scrollTo(0, 0);
                       navigate(`/poster/${anime.mal_id}`, { state: { to: 'backToTop' } });
                     }}
                   >
-                    <ItemTop anime={anime} filter={filter} />
+                    <ItemTop anime={anime} filter={filter} index={index} currentPage={currentPage} />
                   </div>
                 ))}
               </section>
@@ -127,7 +126,3 @@ const Top = () => {
 };
 
 export default Top;
-
-// {data.length !== 0 ? (
-//
-// ) : null}
