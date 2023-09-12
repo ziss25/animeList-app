@@ -25,11 +25,15 @@ const Headers = () => {
         <LogoTitle style="text-xl md:text-2xl 2xl:text-3xl" />
       </div>
       <Navbar mode="desktop" />
-      {/* jika ntar nanti mau adain fitur avatar border */}
-      <div className="w-10 h-10 rounded-full overflow-hidden">
-        <img className="w-full h-full object-cover" src="https://i.ibb.co/5FZBhRV/088830a300bb.jpg" />
+      {/* jika ntar nanti mau adain fitur avatar border .... for next*/}
+      <div className="flex items-center gap-2">
+        <h4 className="font-semibold">ziss</h4>
+        <div className="w-10 h-10 rounded-full overflow-hidden cursor-pointer">
+          <img className="w-full h-full object-cover" src="https://i.ibb.co/rv81FZ0/e0984745e2cb.jpg" />
+        </div>
+
+        {/* <Button children="login" /> */}
       </div>
-      {/* <Button children="login" /> */}
     </div>
   );
 };
