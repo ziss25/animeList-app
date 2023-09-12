@@ -26,8 +26,10 @@ const Headers = () => {
       </div>
       <Navbar mode="desktop" />
       {/* jika ntar nanti mau adain fitur avatar border */}
-      {/* <img src={test} width={40} /> */}
-      <Button children="login" />
+      <div className="w-10 h-10 rounded-full overflow-hidden">
+        <img className="w-full h-full object-cover" src="https://i.ibb.co/5FZBhRV/088830a300bb.jpg" />
+      </div>
+      {/* <Button children="login" /> */}
     </div>
   );
 };
