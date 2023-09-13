@@ -9,8 +9,9 @@ import { Provider } from './context/myContext';
 import MenuNavbar from './components/Templates/MenuNavbar';
 import GlobalLoading from './components/GlobalLoading';
 import { useEffect, useState } from 'react';
-import Poster from './components/Elements/Poster';
 import Top from './pages/Top';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,6 +38,8 @@ function App() {
                 <Route path="/season" element={<Season />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/poster/:id" element={<PosterDetail />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             )}
