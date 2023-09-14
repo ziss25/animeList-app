@@ -9,7 +9,6 @@ const Provider = ({ children }) => {
   // as page season
   const [years, setYears] = useState('2023');
   const [season, setSeason] = useState('fall');
-  const [token, setToken] = useState('');
 
   return (
     <Context.Provider
@@ -24,8 +23,6 @@ const Provider = ({ children }) => {
         setYears,
         season,
         setSeason,
-        token,
-        setToken,
       }}
     >
       {children}

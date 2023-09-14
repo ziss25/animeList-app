@@ -1,8 +1,9 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { FilledInput, FormControl, IconButton, InputAdornment, InputLabel, TextField } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Input = ({ title, onChange, type, icon, isErorr }) => {
+  const [result, setResult] = useState('');
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {

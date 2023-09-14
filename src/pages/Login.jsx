@@ -1,15 +1,15 @@
-import { Password, Person } from '@mui/icons-material';
+import { Person } from '@mui/icons-material';
 import React, { useContext, useEffect, useState } from 'react';
 import Input from '../components/Elements/Input';
 import { useNavigate } from 'react-router-dom';
 import LogoTitle from '../components/Elements/LogoTitle';
 import axios from 'axios';
-import { Context } from '../context/myContext';
 import AlertErorr from '../components/Elements/AlertErorr';
+import { removeStorageSess, saveStorageSess } from '../storage/sessionStorage';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setToken } = useContext(Context);
+  const [token, setToken] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [textButton, setTextButton] = useState('login');
@@ -23,7 +23,10 @@ const Login = () => {
     try {
       const response = await axios.post('https://proud-fawn-cowboy-boots.cyclic.app/login', { username, password });
       setToken(response.data.accessToken);
+      removeStorageSess('accessToken');
+      saveStorageSess('accessToken', response.data.accessToken);
       navigate('/');
+      console.log('login berhasil');
     } catch (error) {
       setTextErorr(error.response.data.msg);
       setTextButton('login');

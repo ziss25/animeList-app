@@ -6,11 +6,15 @@ import LogoTitle from '../Elements/LogoTitle';
 import Navbar from '../Fragments/Navbar';
 import jwtDecode from 'jwt-decode';
 import { Avatar } from '@mui/material';
+import { getStorageSess } from '../../storage/sessionStorage';
+import { stringAvatar } from '../../utils/utilAvatar';
+import ProfilePopUp from '../Elements/profilePopUp';
 
 const Headers = () => {
   const navigate = useNavigate();
   const { setIsOpenMenuList } = useContext(Context);
-  const { token } = useContext(Context);
+  const [openProfilePopUp, setOpenProfilePopUp] = useState(false);
+  const [token, setToken] = useState('');
   const [isScrollbg, setisScrollbg] = useState(false);
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('');
@@ -24,6 +28,7 @@ const Headers = () => {
   });
 
   useEffect(() => {
+    setToken(getStorageSess('accessToken'));
     try {
       const decodedToken = jwtDecode(token);
       setName(decodedToken.username);
@@ -51,14 +56,25 @@ const Headers = () => {
         </button>
       ) : avatar ? (
         // jika ada avatar nya di db -> itu yg di pake
-        <Avatar alt="Remy Sharp" src={avatar} />
+        <Avatar alt={name} src={avatar} />
       ) : (
         // kalo ga ada yaa avatart text aja
-        <Avatar
-          sx={{ backgroundColor: 'red' }} //
-          alt={name}
-          src="/broken-image.jpg"
-        />
+        <div className="relative">
+          <div className="cursor-pointer">
+            <Avatar
+              {...stringAvatar(name)}
+              onClick={() => {
+                setOpenProfilePopUp(!openProfilePopUp);
+              }}
+            />
+          </div>
+          {openProfilePopUp ? (
+            <ProfilePopUp
+              setToken={setToken} //
+              setOpenProfilePopUp={setOpenProfilePopUp}
+            />
+          ) : null}
+        </div>
       )}
     </div>
   );
