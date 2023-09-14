@@ -67,25 +67,25 @@ const PosterDetail = () => {
   };
 
   const handleCardClick = () => {
-    if (to === 'backToSearch') {
+    if (to?.to === 'backToSearch') {
       navigate(`/search`);
       window.scrollTo(0, 0);
-    } else if (to === 'backToHome') {
+    } else if (to?.to === 'backToHome') {
       navigate(`/`);
       window.scrollTo(0, 700);
-    } else if (to === 'backToSeason') {
+    } else if (to?.to === 'backToSeason') {
       navigate(`/season`);
-    } else if (to === 'backToTop') {
+    } else if (to?.to === 'backToTop') {
       navigate(`/top`);
+    } else {
+      navigate('/');
     }
   };
 
   useEffect(() => {
     getAnimesById();
     getPictures();
-    // if (!location) {
-    setTo(location.state.to);
-    // }
+    setTo(location.state);
   }, [isLoading]);
 
   return (
