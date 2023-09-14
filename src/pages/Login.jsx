@@ -65,7 +65,7 @@ const Login = () => {
               isErorr={isErorr}
             />
             <button
-              className="btn text-white w-full bg-[var(--primary)] hover:bg-red-700 mt-5" //
+              className="btn border-none text-white w-full bg-[var(--primary)] hover:bg-red-700 mt-5" //
               onClick={handleSubmit}
               type="submit"
             >

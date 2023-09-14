@@ -94,7 +94,7 @@ const Register = () => {
           </form>
           <div className="flex mt-5 mb-2">
             <button
-              className="btn text-white w-full bg-[var(--primary)] hover:bg-red-700 " //
+              className="btn border-none text-white w-full bg-[var(--primary)] hover:bg-red-700 " //
               type="submit"
               onClick={handleSubmit}
             >
