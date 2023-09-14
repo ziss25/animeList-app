@@ -14,6 +14,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [confPassword, setConfPassword] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isErorr, setIsErorr] = useState(false);
   const [text, setText] = useState('');
   const [textAlert, setTextAlert] = useState('');
   const [textLoading, setTextLoading] = useState('create');
@@ -34,6 +35,7 @@ const Register = () => {
         console.log(err);
         setTextLoading('create');
         setTextAlert(err.response.data.msg);
+        setIsErorr(true);
       }
     } else {
       alert('maaf data harus di input kan');
@@ -44,8 +46,8 @@ const Register = () => {
   return (
     <>
       <section className="register bg-black relative z-[9999]  min-h-screen flex items-center text-white flex-col justify-center">
-        <LogoTitle style="text-xl md:text-2xl 2xl:text-3xl mb-10" />
-        <div className=" border border-[#aeaeae] rounded-md w-5/6 md:w-4/6 lg:w-2/6 mx-auto  p-3">
+        <LogoTitle style="text-xl md:text-2xl 2xl:text-3xl mb-3" />
+        <div className="  bg-zinc-900 rounded-md w-5/6 md:w-4/6 lg:w-2/6 mx-auto px-3">
           {isSuccess ? (
             <div className="alert alert-success">
               <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
@@ -55,7 +57,7 @@ const Register = () => {
             </div>
           ) : null}
           <h1 className="text-center text-[var(--primary)]  p-3 font-bold">{textAlert}</h1>
-          <h1 className="mt-5 text-center text-2xl mb-5">Register</h1>
+          <h1 className="mt-2 text-center text-2xl mb-5">Register</h1>
           <form action="">
             <Input
               icon={<Person />} //
@@ -71,13 +73,23 @@ const Register = () => {
               icon={<Password />} //
               title="password"
               type="password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setIsErorr(false);
+                setTextAlert('');
+              }}
+              isErorr={isErorr}
             />
             <Input
               icon={<KeyIcon />} //
               title="confPassword"
               type="password"
-              onChange={(e) => setConfPassword(e.target.value)}
+              onChange={(e) => {
+                setConfPassword(e.target.value);
+                setIsErorr(false);
+                setTextAlert('');
+              }}
+              isErorr={isErorr}
             />
           </form>
           <div className="flex mt-5 mb-2">

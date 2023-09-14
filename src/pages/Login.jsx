@@ -8,15 +8,18 @@ import { Context } from '../context/myContext';
 import AlertErorr from '../components/Elements/AlertErorr';
 
 const Login = () => {
+  const navigate = useNavigate();
   const { setToken } = useContext(Context);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [textButton, setTextButton] = useState('login');
   const [textErorr, setTextErorr] = useState('');
+  const [isErorr, setIsErorr] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setTextButton('loading...');
+    console.log({ username, password });
     try {
       const response = await axios.post('https://proud-fawn-cowboy-boots.cyclic.app/login', { username, password });
       setToken(response.data.accessToken);
@@ -24,44 +27,45 @@ const Login = () => {
     } catch (error) {
       setTextErorr(error.response.data.msg);
       setTextButton('login');
-      setTimeout(() => {
-        setTextErorr('');
-      }, 5000);
+      setIsErorr(true);
     }
   };
 
   const handleInputUserName = (e) => {
     setUsername(e.target.value);
+    setTextErorr('');
+    setIsErorr(false);
   };
 
   const handleInputUserPass = (e) => {
     setPassword(e.target.value);
+    setTextErorr('');
+    setIsErorr(false);
   };
-
-  const navigate = useNavigate();
 
   return (
     <>
-      <section className="login  bg-black relative z-[9999] min-h-screen flex flex-col items-center text-white justify-center">
+      <section className="login bg-black relative z-[9999] min-h-screen flex flex-col items-center text-white justify-center">
         <LogoTitle style="text-xl md:text-2xl 2xl:text-3xl mb-3" />
-        <div className=" border border-[#aeaeae] rounded-md w-5/6 md:w-4/6 lg:w-2/6 mx-auto  p-3">
+        <div className="  bg-zinc-900  border-[#aeaeae] rounded-md w-5/6 md:w-4/6 lg:w-2/6 mx-auto px-5">
           {/* jika gagal login maka text ini tampil maka  */}
           {textErorr && <AlertErorr textErorr={textErorr} />}
           <h1 className="mt-5 text-center text-2xl mb-5">Login</h1>
           <form action="">
             <Input
-              icon={<Person />}
-              title="userName" //
+              icon={<Person fontSize="small" />}
+              title="username" //
               onChange={handleInputUserName}
+              isErorr={isErorr}
             />
             <Input
-              icon={<Password />}
               title="password" //
               type="password"
               onChange={handleInputUserPass}
+              isErorr={isErorr}
             />
             <button
-              className="btn text-white w-full bg-[var(--primary)] hover:bg-red-700" //
+              className="btn text-white w-full bg-[var(--primary)] hover:bg-red-700 mt-5" //
               onClick={handleSubmit}
               type="submit"
             >

@@ -9,6 +9,7 @@ import { Avatar } from '@mui/material';
 
 const Headers = () => {
   const navigate = useNavigate();
+  const { setIsOpenMenuList } = useContext(Context);
   const { token } = useContext(Context);
   const [isScrollbg, setisScrollbg] = useState(false);
   const [name, setName] = useState('');
