@@ -6,17 +6,17 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import LogoutIcon from '@mui/icons-material/Logout';
-import React from 'react';
-import { removeStorageSess } from '../../storage/sessionStorage';
+import React, { useContext } from 'react';
 import axios from 'axios';
 
-const ProfilePopUp = ({ setToken, setOpenProfilePopUp }) => {
+const ProfilePopUp = ({ setOpenProfilePopUp, setToken }) => {
   const handleLogOut = () => {
     axios
-      .delete('https://proud-fawn-cowboy-boots.cyclic.app/logout')
+      .delete('https://jittery-wasp-undershirt.cyclic.cloud/logout', {
+        withCredentials: true,
+      })
       .then((response) => {
-        removeStorageSess('accessToken');
-        setOpenProfilePopUp(false);
+        setOpenProfilePopUp(true);
         setToken('');
         console.log('Deleted successfully:', response);
       })

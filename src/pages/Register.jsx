@@ -19,23 +19,50 @@ const Register = () => {
   const [textAlert, setTextAlert] = useState('');
   const [textLoading, setTextLoading] = useState('create');
   const [role, setRole] = useState('User');
+  const url = 'https://jittery-wasp-undershirt.cyclic.cloud';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setTextLoading('loading...');
+
     if (username && password && confPassword && name) {
       try {
-        const response = await axios.post('https://proud-fawn-cowboy-boots.cyclic.app/users', { name, username, password, confPassword, role });
-        setText(response.data.msg);
+        const response = await fetch(`${url}/users`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include', // This here
+          body: JSON.stringify({
+            name,
+            username,
+            password,
+            confPassword,
+            role,
+          }),
+        });
+
+        const data = await response.json();
+
+        //  jika gagal
+        if (!response.ok) {
+          console.log('gagal registrasi');
+          setTextAlert(data.msg);
+          console.log(data.msg);
+          throw new Error(data.msg);
+        }
+
+        // jika success
         setIsSuccess(true);
+        setText(data.msg);
         setTimeout(() => {
           navigate('/login');
-        }, 3000);
+        }, 2000);
       } catch (err) {
-        console.log(err);
-        setTextLoading('create');
-        setTextAlert(err.response.data.msg);
+        // tambahan action jika error
         setIsErorr(true);
+      } finally {
+        setTextLoading('create');
       }
     } else {
       alert('maaf data harus di input kan');

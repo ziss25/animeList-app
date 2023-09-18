@@ -9,15 +9,39 @@ import { Avatar } from '@mui/material';
 import { getStorageSess } from '../../storage/sessionStorage';
 import { stringAvatar } from '../../utils/utilAvatar';
 import ProfilePopUp from '../Elements/profilePopUp';
+import axios from 'axios';
 
 const Headers = () => {
   const navigate = useNavigate();
   const { setIsOpenMenuList } = useContext(Context);
-  const [openProfilePopUp, setOpenProfilePopUp] = useState(false);
+  const { openProfilePopUp, setOpenProfilePopUp } = useContext(Context);
+  const { IsLoginPage } = useContext(Context);
   const [token, setToken] = useState('');
   const [isScrollbg, setisScrollbg] = useState(false);
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('');
+
+  const getToken = async () => {
+    try {
+      const response = await axios.get('https://jittery-wasp-undershirt.cyclic.cloud/token', {
+        withCredentials: true, // Mengizinkan kredensial (cookie)
+      });
+      setToken(response.data.accessToken);
+    } catch (err) {
+      console.log('user belum login ');
+    }
+  };
+
+  const parseToken = async () => {
+    try {
+      const decodedToken = await jwtDecode(token);
+      console.log(decodedToken);
+      setName(decodedToken.name);
+      setAvatar(decodedToken.avatar_url);
+    } catch (error) {
+      console.log('tidak ada token');
+    }
+  };
 
   const handleMenuList = () => {
     setIsOpenMenuList(true);
@@ -28,15 +52,10 @@ const Headers = () => {
   });
 
   useEffect(() => {
-    setToken(getStorageSess('accessToken'));
-    try {
-      const decodedToken = jwtDecode(token);
-      setName(decodedToken.username);
-      setAvatar(decodedToken.avatar_url);
-    } catch (error) {
-      console.log('user belum login');
-    }
-  });
+    getToken();
+    parseToken();
+    // console.log('use run');
+  }, [token, IsLoginPage, openProfilePopUp]);
 
   return (
     <div className={isScrollbg ? 'header-active-navigate' : 'header'}>
@@ -82,11 +101,11 @@ const Headers = () => {
 
 export default Headers;
 
-{
-  /* <div className="flex items-center gap-2">
-<h4 className="font-semibold">ziss</h4>
-<div className="w-10 h-10 rounded-full overflow-hidden cursor-pointer">
-  <img className="w-full h-full object-cover" src="https://i.ibb.co/rv81FZ0/e0984745e2cb.jpg" />
-</div>
-</div> */
-}
+// setToken(getStorageSess('accessToken'));
+// try {
+//   const decodedToken = jwtDecode(token);
+//   setName(decodedToken.username);
+//   setAvatar(decodedToken.avatar_url);
+// } catch (error) {
+//   console.log('user belum login');
+// }

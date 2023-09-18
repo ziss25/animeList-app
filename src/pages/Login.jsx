@@ -5,45 +5,53 @@ import { useNavigate } from 'react-router-dom';
 import LogoTitle from '../components/Elements/LogoTitle';
 import axios from 'axios';
 import AlertErorr from '../components/Elements/AlertErorr';
-import { removeStorageSess, saveStorageSess } from '../storage/sessionStorage';
+import { Context } from '../context/myContext';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [token, setToken] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [textButton, setTextButton] = useState('login');
   const [textErorr, setTextErorr] = useState('');
   const [isErorr, setIsErorr] = useState(false);
+  const { setLoginPage } = useContext(Context);
+  const { setOpenProfilePopUp } = useContext(Context);
 
-  const handleSubmit = async (e) => {
+  const url = 'https://jittery-wasp-undershirt.cyclic.cloud';
+
+  const auth = async (e) => {
     e.preventDefault();
     setTextButton('loading...');
-    console.log({ username, password });
     try {
-      const response = await axios.post('https://proud-fawn-cowboy-boots.cyclic.app/login', { username, password });
-      setToken(response.data.accessToken);
-      removeStorageSess('accessToken');
-      saveStorageSess('accessToken', response.data.accessToken);
-      navigate('/');
-      console.log('login berhasil');
-    } catch (error) {
-      setTextErorr(error.response.data.msg);
-      setTextButton('login');
+      const response = await fetch(`${url}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // This here
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        setTextErorr(data.msg);
+        throw new Error(data.msg);
+      }
+
+      const data = await response.json();
+      console.log('Berhasil login:', data);
+      setLoginPage(false);
+      setOpenProfilePopUp(false);
+      setTimeout(() => {
+        navigate('/');
+      });
+    } catch (err) {
+      console.log(err);
       setIsErorr(true);
     }
-  };
-
-  const handleInputUserName = (e) => {
-    setUsername(e.target.value);
-    setTextErorr('');
-    setIsErorr(false);
-  };
-
-  const handleInputUserPass = (e) => {
-    setPassword(e.target.value);
-    setTextErorr('');
-    setIsErorr(false);
   };
 
   return (
@@ -54,22 +62,31 @@ const Login = () => {
           {/* jika gagal login maka text ini tampil maka  */}
           {textErorr && <AlertErorr textErorr={textErorr} />}
           <h1 className="mt-5 text-center text-2xl mb-5">Login</h1>
-          <form action="">
+          <form onSubmit={auth}>
             <Input
               icon={<Person fontSize="small" />}
               title="username" //
-              onChange={handleInputUserName}
+              onChange={(e) => {
+                setUsername(e.target.value);
+                setIsErorr(false);
+                setTextErorr('');
+              }}
+              value={username}
               isErorr={isErorr}
             />
             <Input
               title="password" //
               type="password"
-              onChange={handleInputUserPass}
+              onChange={(e) => {
+                setIsErorr(false);
+                setTextErorr('');
+                setPassword(e.target.value);
+              }}
+              value={password}
               isErorr={isErorr}
             />
             <button
               className="btn border-none text-white w-full bg-[var(--primary)] hover:bg-red-700 mt-5" //
-              onClick={handleSubmit}
               type="submit"
             >
               {textButton}
