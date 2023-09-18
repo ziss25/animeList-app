@@ -6,9 +6,8 @@ import LogoTitle from '../Elements/LogoTitle';
 import Navbar from '../Fragments/Navbar';
 import jwtDecode from 'jwt-decode';
 import { Avatar } from '@mui/material';
-import { getStorageSess } from '../../storage/sessionStorage';
 import { stringAvatar } from '../../utils/utilAvatar';
-import ProfilePopUp from '../Elements/profilePopUp';
+import ProfilePopUp from '../Elements/ProfilePopUp';
 import axios from 'axios';
 
 const Headers = () => {
