@@ -18,13 +18,24 @@ export function stringToColor(string) {
   return color;
 }
 
-export function stringAvatar(name) {
-  return {
-    sx: {
-      bgcolor: stringToColor(name),
-      width: 30,
-      height: 30,
-    },
-    children: `${name.split(' ')[0][0]}`,
-  };
+export function stringAvatar(name, size) {
+  if (size === 'large') {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+        width: 80,
+        height: 80,
+      },
+      children: `${name.split(' ')[0][0]}`,
+    };
+  } else {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+        width: 30,
+        height: 30,
+      },
+      children: `${name.split(' ')[0][0]}`,
+    };
+  }
 }

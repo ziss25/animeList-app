@@ -23,7 +23,7 @@ const Headers = () => {
   const getToken = async () => {
     try {
       const response = await axios.get('https://jittery-wasp-undershirt.cyclic.cloud/token', {
-        withCredentials: true, // Mengizinkan kredensial (cookie)
+        withCredentials: true,
       });
       setToken(response.data.accessToken);
     } catch (err) {
@@ -34,7 +34,6 @@ const Headers = () => {
   const parseToken = async () => {
     try {
       const decodedToken = await jwtDecode(token);
-      console.log(decodedToken);
       setName(decodedToken.name);
       setAvatar(decodedToken.avatar_url);
     } catch (error) {
@@ -53,7 +52,6 @@ const Headers = () => {
   useEffect(() => {
     getToken();
     parseToken();
-    // console.log('use run');
   }, [token, IsLoginPage, openProfilePopUp]);
 
   return (
@@ -74,7 +72,15 @@ const Headers = () => {
         </button>
       ) : avatar ? (
         // jika ada avatar nya di db -> itu yg di pake
-        <Avatar alt={name} src={avatar} />
+        <div>
+          <Avatar
+            alt={name}
+            src={avatar}
+            onClick={() => {
+              setOpenProfilePopUp(!openProfilePopUp);
+            }}
+          />
+        </div>
       ) : (
         // kalo ga ada yaa avatart text aja
         <div className="relative">
@@ -86,14 +92,15 @@ const Headers = () => {
               }}
             />
           </div>
-          {openProfilePopUp ? (
-            <ProfilePopUp
-              setToken={setToken} //
-              setOpenProfilePopUp={setOpenProfilePopUp}
-            />
-          ) : null}
         </div>
       )}
+
+      {openProfilePopUp === true ? (
+        <ProfilePopUp
+          setToken={setToken} //
+          setOpenProfilePopUp={setOpenProfilePopUp}
+        />
+      ) : null}
     </div>
   );
 };

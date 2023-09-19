@@ -12,6 +12,8 @@ import { useEffect, useState } from 'react';
 import Top from './pages/Top';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ProfileUser from './pages/ProfileUser';
+import EditProfile from './pages/EditProfile';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -40,6 +42,8 @@ function App() {
                 <Route path="/poster/:id" element={<PosterDetail />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/profile" element={<ProfileUser />} />
+                <Route path="/profile/edit" element={<EditProfile />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             )}

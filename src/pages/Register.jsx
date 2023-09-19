@@ -24,48 +24,57 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setTextLoading('loading...');
-
-    if (username && password && confPassword && name) {
-      try {
-        const response = await fetch(`${url}/users`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include', // This here
-          body: JSON.stringify({
-            name,
-            username,
-            password,
-            confPassword,
-            role,
-          }),
-        });
-
-        const data = await response.json();
-
-        //  jika gagal
-        if (!response.ok) {
-          console.log('gagal registrasi');
-          setTextAlert(data.msg);
-          console.log(data.msg);
-          throw new Error(data.msg);
-        }
-
-        // jika success
-        setIsSuccess(true);
-        setText(data.msg);
-        setTimeout(() => {
-          navigate('/login');
-        }, 2000);
-      } catch (err) {
-        // tambahan action jika error
-        setIsErorr(true);
-      } finally {
-        setTextLoading('create');
-      }
-    } else {
+    // validation jika salah satu dari input kosong
+    if (!username || !password || !confPassword || !name) {
       alert('maaf data harus di input kan');
+      setTimeout(() => {
+        setTextLoading('create');
+      }, 1000);
+      return;
+    }
+
+    // validation char pass and confPass kurang dari 10
+    if (password.length < 10) {
+      setTextAlert('maaf password dan confPass harus minimal 8char');
+      setIsErorr(true);
+      return;
+    }
+    try {
+      const response = await fetch(`${url}/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // This here
+        body: JSON.stringify({
+          name,
+          username,
+          password,
+          confPassword,
+          role,
+        }),
+      });
+
+      const data = await response.json();
+
+      //  jika gagal
+      if (!response.ok) {
+        console.log('gagal registrasi');
+        setTextAlert(data.msg);
+        console.log(data.msg);
+        throw new Error(data.msg);
+      }
+
+      // jika success
+      setIsSuccess(true);
+      setText(data.msg);
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+    } catch (err) {
+      // tambahan action jika error
+      setIsErorr(true);
+    } finally {
       setTextLoading('create');
     }
   };

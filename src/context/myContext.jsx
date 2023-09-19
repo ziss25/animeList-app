@@ -10,7 +10,8 @@ const Provider = ({ children }) => {
   const [years, setYears] = useState('2023');
   const [season, setSeason] = useState('fall');
   const [IsLoginPage, setLoginPage] = useState(false);
-  const [openProfilePopUp, setOpenProfilePopUp] = useState(true);
+  const [openProfilePopUp, setOpenProfilePopUp] = useState(false);
+  const [isOpenProfile, setIsOpenProfile] = useState(false);
 
   return (
     <Context.Provider
@@ -29,6 +30,8 @@ const Provider = ({ children }) => {
         setLoginPage,
         openProfilePopUp,
         setOpenProfilePopUp,
+        isOpenProfile,
+        setIsOpenProfile,
       }}
     >
       {children}

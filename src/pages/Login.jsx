@@ -51,6 +51,8 @@ const Login = () => {
     } catch (err) {
       console.log(err);
       setIsErorr(true);
+    } finally {
+      setTextButton('login');
     }
   };
 
