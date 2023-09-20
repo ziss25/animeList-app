@@ -17,7 +17,7 @@ const Login = () => {
   const { setLoginPage } = useContext(Context);
   const { setOpenProfilePopUp } = useContext(Context);
 
-  const url = 'https://jittery-wasp-undershirt.cyclic.cloud';
+  const url = 'https://cute-tan-jaguar-cap.cyclic.cloud';
 
   const auth = async (e) => {
     e.preventDefault();

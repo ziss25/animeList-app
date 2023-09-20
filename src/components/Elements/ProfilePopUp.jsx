@@ -16,7 +16,7 @@ const ProfilePopUp = ({ setOpenProfilePopUp, setToken }) => {
 
   const handleLogOut = () => {
     axios
-      .delete('https://jittery-wasp-undershirt.cyclic.cloud/logout', {
+      .delete('https://cute-tan-jaguar-cap.cyclic.cloud/logout', {
         withCredentials: true,
       })
       .then((response) => {

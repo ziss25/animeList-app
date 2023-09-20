@@ -19,7 +19,7 @@ const Register = () => {
   const [textAlert, setTextAlert] = useState('');
   const [textLoading, setTextLoading] = useState('create');
   const [role, setRole] = useState('User');
-  const url = 'https://jittery-wasp-undershirt.cyclic.cloud';
+  const url = 'https://cute-tan-jaguar-cap.cyclic.cloud';
 
   const handleSubmit = async (e) => {
     e.preventDefault();

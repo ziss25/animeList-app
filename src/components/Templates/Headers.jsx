@@ -14,7 +14,7 @@ const Headers = () => {
   const navigate = useNavigate();
   const { setIsOpenMenuList } = useContext(Context);
   const { openProfilePopUp, setOpenProfilePopUp } = useContext(Context);
-  const { IsLoginPage } = useContext(Context);
+  const { setLoginPage, IsLoginPage } = useContext(Context);
   const [token, setToken] = useState('');
   const [isScrollbg, setisScrollbg] = useState(false);
   const [name, setName] = useState('');
@@ -22,7 +22,7 @@ const Headers = () => {
 
   const getToken = async () => {
     try {
-      const response = await axios.get('https://jittery-wasp-undershirt.cyclic.cloud/token', {
+      const response = await axios.get('https://cute-tan-jaguar-cap.cyclic.cloud/token', {
         withCredentials: true,
       });
       setToken(response.data.accessToken);
@@ -52,7 +52,7 @@ const Headers = () => {
   useEffect(() => {
     getToken();
     parseToken();
-  }, [token, IsLoginPage, openProfilePopUp]);
+  }, [IsLoginPage, token, openProfilePopUp]);
 
   return (
     <div className={isScrollbg ? 'header-active-navigate' : 'header'}>
@@ -65,6 +65,7 @@ const Headers = () => {
         <button
           className="px-6 py-1 font-semibold rounded-md text-sm bg-[var(--primary)] md:text-md md:px-8 2xl:text-lg 2xl:px-10 2xl:py-2 2xl:translate-y-1"
           onClick={() => {
+            setLoginPage(true);
             navigate('/login');
           }}
         >
@@ -106,12 +107,3 @@ const Headers = () => {
 };
 
 export default Headers;
-
-// setToken(getStorageSess('accessToken'));
-// try {
-//   const decodedToken = jwtDecode(token);
-//   setName(decodedToken.username);
-//   setAvatar(decodedToken.avatar_url);
-// } catch (error) {
-//   console.log('user belum login');
-// }
