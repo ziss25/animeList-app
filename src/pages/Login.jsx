@@ -1,7 +1,7 @@
 import { Person } from '@mui/icons-material';
 import React, { useContext, useEffect, useState } from 'react';
 import Input from '../components/Elements/Input';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import LogoTitle from '../components/Elements/LogoTitle';
 import axios from 'axios';
 import AlertErorr from '../components/Elements/AlertErorr';
@@ -9,6 +9,7 @@ import { Context } from '../context/myContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [textButton, setTextButton] = useState('login');
@@ -16,12 +17,14 @@ const Login = () => {
   const [isErorr, setIsErorr] = useState(false);
   const { setLoginPage } = useContext(Context);
   const { setOpenProfilePopUp } = useContext(Context);
+  const { statusLogin, setStatusLogin } = useContext(Context);
 
   const url = 'https://cute-tan-jaguar-cap.cyclic.cloud';
 
   const auth = async (e) => {
     e.preventDefault();
     setTextButton('loading...');
+
     try {
       const response = await fetch(`${url}/login`, {
         method: 'POST',
@@ -45,8 +48,10 @@ const Login = () => {
       console.log('Berhasil login:', data);
       setLoginPage(false);
       setOpenProfilePopUp(false);
+      setStatusLogin(true);
+      console.log({ statusLogin: statusLogin });
       setTimeout(() => {
-        navigate('/');
+        navigate(location.state ? location.state.dest : '/');
       });
     } catch (err) {
       console.log(err);

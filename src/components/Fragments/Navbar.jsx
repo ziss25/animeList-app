@@ -1,4 +1,5 @@
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 export default function Navbar({ mode }) {
   return (
@@ -17,6 +18,9 @@ export default function Navbar({ mode }) {
             </CustomLink>
             <CustomLink mode={mode} to="/search">
               search
+            </CustomLink>
+            <CustomLink mode={mode} to="/userlist">
+              users
             </CustomLink>
           </ul>
         </nav>
@@ -37,6 +41,10 @@ export default function Navbar({ mode }) {
           <CustomLink to="/search">
             <i className="fa fa-search" aria-hidden="true"></i>
             <h3>search</h3>
+          </CustomLink>
+          <CustomLink to="/userlist">
+            <PeopleAltIcon />
+            <h3>Users</h3>
           </CustomLink>
         </ul>
       )}

@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ProfileUser from './pages/ProfileUser';
 import EditProfile from './pages/EditProfile';
+import UserList from './pages/UserList';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -44,6 +45,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<ProfileUser />} />
                 <Route path="/profile/edit" element={<EditProfile />} />
+                <Route path="/userlist" element={<UserList />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             )}

@@ -3,20 +3,21 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { stringAvatar } from '../utils/utilAvatar';
 import EditIcon from '@mui/icons-material/Edit';
-// import bg from '../assets/bg/bg-unsplash.jpg';
 import bg2 from '../assets/demon-slayer-1.png';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const ProfileUser = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState('');
   const [description, setDescription] = useState('');
   const [loadingResources, setLoadingResources] = useState(true);
   const url = 'https://cute-tan-jaguar-cap.cyclic.cloud';
+
   const getUser = async () => {
     try {
       const response = await axios.get(`${url}/token`, {
@@ -85,7 +86,7 @@ const ProfileUser = () => {
                 size="small"
                 endIcon={<ArrowBackIcon />}
                 onClick={() => {
-                  navigate('/');
+                  navigate(location.state ? location.state.dest : '/');
                 }}
               >
                 Back

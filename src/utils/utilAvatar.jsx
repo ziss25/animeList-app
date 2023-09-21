@@ -28,6 +28,15 @@ export function stringAvatar(name, size) {
       },
       children: `${name.split(' ')[0][0]}`,
     };
+  } else if (size === 'medium') {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+        width: 40,
+        height: 40,
+      },
+      children: `${name.split(' ')[0][0]}`,
+    };
   } else {
     return {
       sx: {

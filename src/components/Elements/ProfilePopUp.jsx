@@ -9,10 +9,14 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import React, { useContext } from 'react';
 import axios from 'axios';
 import Person2Icon from '@mui/icons-material/Person2';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Context } from '../../context/myContext';
 
 const ProfilePopUp = ({ setOpenProfilePopUp, setToken }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { setLoginPage } = useContext(Context);
+  const { setStatusLogin, statusLogin } = useContext(Context);
 
   const handleLogOut = () => {
     axios
@@ -22,6 +26,10 @@ const ProfilePopUp = ({ setOpenProfilePopUp, setToken }) => {
       .then((response) => {
         setOpenProfilePopUp(false);
         setToken('');
+        setLoginPage(false);
+        // kita ubah state status login
+        setStatusLogin(false);
+        console.log({ statusLogin: statusLogin });
         console.log('Deleted successfully:', response);
       })
       .catch((error) => {
@@ -36,7 +44,7 @@ const ProfilePopUp = ({ setOpenProfilePopUp, setToken }) => {
             <ListItem
               disablePadding
               onClick={() => {
-                navigate('/profile');
+                navigate('/profile', { state: { dest: location.pathname } });
               }}
             >
               <ListItemButton>

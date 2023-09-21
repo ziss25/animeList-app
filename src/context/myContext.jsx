@@ -12,6 +12,7 @@ const Provider = ({ children }) => {
   const [IsLoginPage, setLoginPage] = useState(false);
   const [openProfilePopUp, setOpenProfilePopUp] = useState(false);
   const [isOpenProfile, setIsOpenProfile] = useState(false);
+  const [statusLogin, setStatusLogin] = useState(false);
 
   return (
     <Context.Provider
@@ -32,6 +33,8 @@ const Provider = ({ children }) => {
         setOpenProfilePopUp,
         isOpenProfile,
         setIsOpenProfile,
+        statusLogin,
+        setStatusLogin,
       }}
     >
       {children}

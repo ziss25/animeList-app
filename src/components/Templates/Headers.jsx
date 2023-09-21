@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Context } from '../../context/myContext';
 import HambButton from '../Elements/HambButton';
 import LogoTitle from '../Elements/LogoTitle';
@@ -12,9 +12,11 @@ import axios from 'axios';
 
 const Headers = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { setIsOpenMenuList } = useContext(Context);
   const { openProfilePopUp, setOpenProfilePopUp } = useContext(Context);
   const { setLoginPage, IsLoginPage } = useContext(Context);
+  const { statusLogin, setStatusLogin } = useContext(Context);
   const [token, setToken] = useState('');
   const [isScrollbg, setisScrollbg] = useState(false);
   const [name, setName] = useState('');
@@ -26,6 +28,7 @@ const Headers = () => {
         withCredentials: true,
       });
       setToken(response.data.accessToken);
+      setStatusLogin(true);
     } catch (err) {
       console.log('user belum login ');
     }
@@ -52,21 +55,25 @@ const Headers = () => {
   useEffect(() => {
     getToken();
     parseToken();
-  }, [IsLoginPage, token, openProfilePopUp]);
+  }, [IsLoginPage, token, openProfilePopUp, statusLogin]);
 
   return (
     <div className={isScrollbg ? 'header-active-navigate' : 'header'}>
+      {/* <div className="header"> */}
       <div className="flex items-center gap-7">
         <HambButton handleMenuList={handleMenuList} />
         <LogoTitle style="text-xl md:text-2xl 2xl:text-3xl" />
       </div>
       <Navbar mode="desktop" />
-      {!token ? (
+      {!statusLogin || !token ? (
         <button
           className="px-6 py-1 font-semibold rounded-md text-sm bg-[var(--primary)] md:text-md md:px-8 2xl:text-lg 2xl:px-10 2xl:py-2 2xl:translate-y-1"
           onClick={() => {
             setLoginPage(true);
-            navigate('/login');
+            // pada saat click tombol login akan di rediarect ke form login beserta path terakhir nya user... yg dimana jika user success login kembali ke path terakhir dia
+            navigate('/login', {
+              state: { dest: location.pathname },
+            });
           }}
         >
           login

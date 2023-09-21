@@ -20,7 +20,6 @@ const Search = () => {
     clearTimeout(searchTimer);
     searchTimer = setTimeout(async () => {
       try {
-        console.log(loading);
         const response = await axios(`https://api.jikan.moe/v4/anime?q=${querySearch}&sfw=true${type}`);
         setDataResult(response.data.data);
         setLoading(false);
@@ -87,7 +86,7 @@ const Search = () => {
         <div className="w-full md:w-3/12 mt-5 md:mt-0">
           <select className="select  w-full h-full" onChange={handleTypeClick}>
             {typeCategory.map((type, index) => (
-              <option>{type.label}</option>
+              <option key={index}>{type.label}</option>
             ))}
           </select>
         </div>
