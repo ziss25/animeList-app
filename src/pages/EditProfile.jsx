@@ -18,6 +18,8 @@ const EditProfile = () => {
   const [msg, setMsg] = useState('');
   const [textButton, setTextButton] = useState('save');
   const [textErorr, setTextErorr] = useState('');
+  const [nameErrorText, setNameError] = useState(false);
+  const [desErrorText, setDesError] = useState(false);
   const { openProfilePopUp, setOpenProfilePopUp } = useContext(Context);
   const url = 'https://cute-tan-jaguar-cap.cyclic.cloud';
 
@@ -35,7 +37,6 @@ const EditProfile = () => {
   };
 
   const imagesUpdate = async () => {
-    setTextButton('loading...');
     // init file nya dan masuukan di form data
     const formData = new FormData();
     formData.append('file', images);
@@ -50,7 +51,6 @@ const EditProfile = () => {
   };
 
   const nameUpdate = async () => {
-    setTextButton('loading...');
     return axios
       .patch(
         `${url}/users/username/${id}`,
@@ -68,7 +68,6 @@ const EditProfile = () => {
   };
 
   const descriptionUpdate = async () => {
-    setTextButton('loading...');
     return axios
       .patch(
         `${url}/users/description/${id}`,
@@ -86,16 +85,34 @@ const EditProfile = () => {
   };
 
   const postProfileSave = async () => {
+    setTextButton('loading...');
     try {
+      // validation jika inputan nama panjang nya lebih dari 30 char
+      if (name.length >= 30) {
+        setTextErorr('Sorry, the name must be less than 30 characters');
+        setNameError(true);
+        throw new Erorr();
+      }
+      if (description.length >= 120) {
+        setTextErorr('Sorry, the description must be less than 120 characters');
+        setDesError(true);
+        throw new Erorr();
+      }
+
+      // update jika ada inputan
+      // jika terdapat image maka kita update
       if (images) {
         const resImage = await imagesUpdate();
       }
+      // jika terdapat inputan name maka kita update
       if (name) {
         const resName = await nameUpdate();
       }
+      // jika terdapat inputan description  maka kita update
       if (description) {
         const resDescription = await descriptionUpdate();
       }
+
       setMsg('profile success updated');
       setOpenProfilePopUp(false);
       setTimeout(() => {
@@ -119,16 +136,16 @@ const EditProfile = () => {
           <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span>{msg}</span>
+          <span className="text-sm md:text-md xl:text-lg">{msg}</span>
         </div>
       )}
 
       {textErorr && (
-        <div className="alert alert-danger  mb-1 w-[300px] lg:w-[350px]">
+        <div className=" bg-[var(--primary)] text-white alert flex  mb-1 w-[300px] lg:w-[350px]">
           <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span>{msg}</span>
+          <span className="text-sm md:text-md xl:text-lg">{textErorr}</span>
         </div>
       )}
 
@@ -160,7 +177,13 @@ const EditProfile = () => {
               id="standard-basic"
               label="change name"
               variant="standard"
-              onChange={(e) => setName(e.target.value)}
+              placeholder="maximum 30 characters"
+              error={nameErrorText ? 'error' : ''}
+              onChange={(e) => {
+                setTextErorr('');
+                setNameError(false);
+                setName(e.target.value);
+              }}
             />
           </div>
           <div className="mb-10 text-white">
@@ -176,10 +199,16 @@ const EditProfile = () => {
               }}
               fullWidth
               label="change description"
+              placeholder="maximum 120 characters"
               variant="standard"
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={(e) => {
+                setTextErorr('');
+                setDesError(false);
+                setDescription(e.target.value);
+              }}
               multiline
               rows={4}
+              error={desErrorText ? 'error' : ''}
             />
           </div>
           <div>

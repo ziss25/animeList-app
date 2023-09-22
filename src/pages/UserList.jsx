@@ -75,7 +75,6 @@ const UserList = () => {
         {userLogin ? (
           data.map((user) => (
             <Card
-              // kasih paling atas user currently atau akun user nya
               className={`mb-5 ${name === user.name ? 'order-first' : null}`}
               sx={{
                 backgroundColor: '#18181b',
@@ -109,10 +108,13 @@ const UserList = () => {
                   <Typography
                     sx={{
                       color: '#aeaeae',
-                      fontSize: 12, //
+                      fontSize: 12,
                     }}
                   >
-                    {user.description}{' '}
+                    {/* optimaze jika description memiliki char panjang */}
+                    {user.description.length > 60
+                      ? user.description.slice(0, 55 - 3) + '...' //
+                      : user.description}{' '}
                   </Typography>
                 }
               />
