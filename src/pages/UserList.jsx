@@ -111,8 +111,8 @@ const UserList = () => {
                       fontSize: 12,
                     }}
                   >
-                    {/* optimaze jika description memiliki char panjang */}
-                    {user.description.length > 60
+                    {/* optimaze jika description   memiliki char panjang */}
+                    {user.description?.length > 60
                       ? user.description.slice(0, 55 - 3) + '...' //
                       : user.description}{' '}
                   </Typography>
