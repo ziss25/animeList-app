@@ -14,9 +14,10 @@ const EditProfile = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [images, setImages] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
   const [id, setId] = useState(null);
   const [msg, setMsg] = useState('');
-  const [textButton, setTextButton] = useState('save');
+  const [textButton, setTextButton] = useState('update profile');
   const [textErorr, setTextErorr] = useState('');
   const [nameErrorText, setNameError] = useState(false);
   const [desErrorText, setDesError] = useState(false);
@@ -30,7 +31,8 @@ const EditProfile = () => {
       });
       const decodedToken = await jwtDecode(response.data.accessToken);
       setId(decodedToken.userId);
-      console.log(decodedToken);
+      setSelectedFile(decodedToken.avatar_url);
+      // console.log(decodedToken);
     } catch (err) {
       navigate('/');
     }
@@ -113,6 +115,7 @@ const EditProfile = () => {
         const resDescription = await descriptionUpdate();
       }
 
+      console.log({ images, name, description });
       setMsg('profile success updated');
       setOpenProfilePopUp(false);
       setTimeout(() => {
@@ -121,97 +124,128 @@ const EditProfile = () => {
     } catch (err) {
       console.log(err);
     } finally {
-      setTextButton('save');
+      setTextButton('update profile');
     }
   };
+
+  function loaderImg(event) {
+    // Baca dan tampilkan gambar
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setSelectedFile(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 
   useEffect(() => {
     getUser();
   }, []);
 
+  useEffect(() => {
+    console.log(selectedFile);
+  }, [selectedFile]);
+
   return (
-    <div className="fixed flex flex-col  items-center top-0 right-0 left-0 bottom-0  min-h-screen overflow-y-auto overflow-x-hidden pt-3  overflow-scroll bg-black z-[800]">
-      {msg && (
-        <div className="alert alert-success  mb-2 w-[300px] lg:w-[350px]">
-          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span className="text-sm md:text-md xl:text-lg">{msg}</span>
-        </div>
-      )}
+    <div className="fixed  top-0 right-0 left-0 bottom-0  min-h-screen overflow-y-auto  overflow-x-hidden overflow-y-auto  bg-black z-[800]">
+      <div className="text-white h-full  overflow-auto max-w-xl mx-auto md:mt-10 bg-zinc-900 rounded-lg ">
+        <div className="text-center p-5 flex flex-col justify-between  h-full">
+          {msg && (
+            <div className="alert alert-success  mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="text-sm md:text-md xl:text-lg">{msg}</span>
+            </div>
+          )}
 
-      {textErorr && (
-        <div className=" bg-[var(--primary)] text-white alert flex  mb-1 w-[300px] lg:w-[350px]">
-          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span className="text-sm md:text-md xl:text-lg">{textErorr}</span>
-        </div>
-      )}
-
-      <div className="text-white bg-zinc-900 rounded-lg w-[300px] md:w-[350px] mb-5 ">
-        <div className="header-bg relative h-[150px] rounded-lg flex justify-center bg-cover" style={{ backgroundImage: `url(${bg})` }}></div>
-        <div className="pt-14 text-center p-5">
-          <div className="mb-8 text-start cursor-pointer">
-            <label htmlFor="fileInput" className="file-input-label">
-              <EditIcon className="mr-2" />
-              upload avatar
-            </label>
-            <input onChange={(e) => setImages(e.target.files[0])} className="mt-2" type="file" id="fileInput" name="file" accept=".jpg, .jpeg, .png" />
-          </div>
-          <div className="mb-8">
-            <TextField
-              sx={{
-                '& label': {
-                  color: 'white',
-                },
-                '& input': {
-                  color: 'white',
-                  borderColor: 'white',
-                  '&:focus': {
-                    borderColor: 'white',
+          {textErorr && (
+            <div className=" bg-[var(--primary)] text-white alert flex  mb-1">
+              <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="text-sm md:text-md xl:text-lg">{textErorr}</span>
+            </div>
+          )}
+          <div className="">
+            <div className="mb-8 text-start flex flex-col items-center">
+              <label htmlFor="fileInput" id="file-label" className="flex flex-col items-center cursor-pointer" style={{ cursor: 'pointer' }}>
+                <img
+                  src={selectedFile} //
+                  alt=""
+                  className="rounded-full w-20 h-20 object-cover"
+                />
+                change avatar
+              </label>
+              <input
+                onChange={(e) => {
+                  loaderImg(e);
+                  // save gambar ke state jika click save maka akan di update
+                  setImages(e.target.files[0]);
+                }}
+                className="mt-2 text-wrap hidden"
+                type="file"
+                id="fileInput"
+                name="file"
+                accept=".jpg, .jpeg, .png"
+              />
+            </div>
+            <div className="mb-8">
+              <TextField
+                sx={{
+                  '& label': {
+                    color: 'white',
                   },
-                },
-              }}
-              fullWidth
-              id="standard-basic"
-              label="change name"
-              variant="standard"
-              placeholder="maximum 30 characters"
-              error={nameErrorText ? 'error' : ''}
-              onChange={(e) => {
-                setTextErorr('');
-                setNameError(false);
-                setName(e.target.value);
-              }}
-            />
+                  '& input': {
+                    color: 'white',
+                    borderColor: 'white',
+                    '&:focus': {
+                      borderColor: 'white',
+                    },
+                  },
+                }}
+                fullWidth
+                id="standard-basic"
+                label="change name"
+                variant="standard"
+                placeholder="maximum 30 characters"
+                error={nameErrorText ? 'error' : ''}
+                onChange={(e) => {
+                  setTextErorr('');
+                  setNameError(false);
+                  setName(e.target.value);
+                }}
+              />
+            </div>
+            <div className="mb-10 text-white">
+              <TextField
+                sx={{
+                  '& label': {
+                    color: 'white',
+                  },
+                  '& .MuiInputBase-root': {
+                    color: 'white',
+                    borderBottomColor: 'white',
+                  },
+                }}
+                fullWidth
+                label="change description"
+                placeholder="maximum 120 characters"
+                variant="standard"
+                onChange={(e) => {
+                  setTextErorr('');
+                  setDesError(false);
+                  setDescription(e.target.value);
+                }}
+                multiline
+                rows={4}
+                error={desErrorText ? 'error' : ''}
+              />
+            </div>
           </div>
-          <div className="mb-10 text-white">
-            <TextField
-              sx={{
-                '& label': {
-                  color: 'white',
-                },
-                '& .MuiInputBase-root': {
-                  color: 'white',
-                  borderBottomColor: 'white',
-                },
-              }}
-              fullWidth
-              label="change description"
-              placeholder="maximum 120 characters"
-              variant="standard"
-              onChange={(e) => {
-                setTextErorr('');
-                setDesError(false);
-                setDescription(e.target.value);
-              }}
-              multiline
-              rows={4}
-              error={desErrorText ? 'error' : ''}
-            />
-          </div>
-          <div>
+          <div className="">
             <button className="flex  w-full mt-5 px-2 py-1 mb-2 rounded-md justify-center bg-[var(--primary)]" onClick={postProfileSave}>
               {textButton}
             </button>
