@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Star from './Stars';
 import medalBronze from '../../assets/svg/medalBronze.svg';
 import medalGold from '../../assets/svg/medalGold.svg';
 import medalSilver from '../../assets/svg/medalSilver.svg';
+import { Context } from '../../context/myContext';
 
 const ItemTop = ({ anime, filter, index, currentPage }) => {
+  const { darkMode } = useContext(Context);
+
   return (
     <>
       {/* rank medal */}
@@ -38,26 +41,28 @@ const ItemTop = ({ anime, filter, index, currentPage }) => {
 
       <div>
         {filter === 'rank' && (
-          <h1 className="text-xs font-bold">
-            rank:<span className="text-[var(--primary)] ml-1">#{anime.rank}</span>
+          <h1 className={`${darkMode ? 'text-white' : 'text-black'} text-xs font-bold`}>
+            rank:<span className="text-[var(--primary)]   ml-1">#{anime.rank}</span>
           </h1>
         )}
         {filter === 'bypopularity' && (
-          <h1 className="text-xs font-bold">
+          <h1 className={`${darkMode ? 'text-white' : 'text-black'} text-xs font-bold`}>
             popularity:<span className="text-[var(--primary)] ml-1">#{anime.popularity}</span>
           </h1>
         )}
         {filter === 'favorite' && (
-          <h1 className="text-xs font-bold">
+          <h1 className={`${darkMode ? 'text-white' : 'text-black'} text-xs font-bold`}>
             favorite: <span className="text-[var(--primary)] ml-1">{anime.favorites}</span>
           </h1>
         )}
 
-        <h1 className="typograpy-overflow-title text-lg mt-2 mb-2">{anime.title}</h1>
-        <p className="typograpy-overflow-title text-xs">{anime.synopsis}</p>
-        <div className="flex gap-3 items-center mt-2">
-          <Star stars={anime.score} />
-          <span className="text-xs">{anime.score} / 10</span>
+        <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
+          <h1 className="typograpy-overflow-title text-lg mt-2  mb-2">{anime.title}</h1>
+          <p className="typograpy-overflow-title text-xs">{anime.synopsis}</p>
+          <div className="flex gap-3 items-center mt-2">
+            <Star stars={anime.score} />
+            <span className="text-xs">{anime.score} / 10</span>
+          </div>
         </div>
       </div>
     </>

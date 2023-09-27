@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Context } from '../../context/myContext';
 import Star from '../Elements/Stars';
 
 const CardList = ({ data }) => {
+  const { darkMode } = useContext(Context);
   const [img, setImg] = useState('');
   const [title, setTitle] = useState('');
   const [genre, setGenre] = useState([]);
@@ -33,9 +35,12 @@ const CardList = ({ data }) => {
         <div className="picture overflow-hidden rounded-md">
           <img src={img} />
         </div>
-        <div className="flex flex-col justify-evenly flex-wrap">
+        <div
+          className={`${darkMode ? 'text-white' : 'text-black'} 
+        flex flex-col justify-evenly flex-wrap`}
+        >
           <h3 className="text-base font-bold">{title}</h3>
-          <p className="text-xs text-gray-300">
+          <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'} text-xs`}>
             {genre.map((text, index) => (
               <span className="mr-1" key={index}>
                 {text.name},

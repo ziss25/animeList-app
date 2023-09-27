@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context } from '../../context/myContext';
 
 const LogoTitle = ({ style }) => {
+  const { darkMode } = useContext(Context);
+
   return (
-    <h1 className={`font-semibold ${style}`}>
+    <h1 className={`font-semibold ${style} ${!darkMode ? 'text-black' : null}`}>
       soon<span className="text-[var(--primary)]">Flix</span>
     </h1>
   );

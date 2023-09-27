@@ -1,25 +1,29 @@
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import { useContext } from 'react';
+import { Context } from '../../context/myContext';
 
 export default function Navbar({ mode }) {
+  const { darkMode } = useContext(Context);
+
   return (
     <>
       {mode === 'desktop' ? (
         <nav>
-          <ul className="hidden md:flex gap-5 text-sm md:text-md -translate-x-3 2xl:text-lg">
-            <CustomLink mode={mode} to="/">
+          <ul className={`hidden font-bold md:flex gap-5 text-sm md:text-md -translate-x-3 2xl:text-lg ${!darkMode ? 'text-black' : null}`}>
+            <CustomLink mode={mode} to="/" darkMode={darkMode}>
               Home
             </CustomLink>
-            <CustomLink mode={mode} to="/top">
+            <CustomLink mode={mode} to="/top" darkMode={darkMode}>
               Top
             </CustomLink>
-            <CustomLink mode={mode} to="/season">
+            <CustomLink mode={mode} to="/season" darkMode={darkMode}>
               season
             </CustomLink>
-            <CustomLink mode={mode} to="/search">
+            <CustomLink mode={mode} to="/search" darkMode={darkMode}>
               search
             </CustomLink>
-            <CustomLink mode={mode} to="/userlist">
+            <CustomLink mode={mode} to="/userlist " darkMode={darkMode}>
               users
             </CustomLink>
           </ul>
@@ -52,15 +56,14 @@ export default function Navbar({ mode }) {
   );
 }
 
-function CustomLink({ to, children, mode, ...props }) {
+function CustomLink({ to, children, mode, darkMode, ...props }) {
   const resolvedPath = useResolvedPath(to);
   const isActive = useMatch({ path: resolvedPath.pathname, end: true });
 
-  let classActive = 'bg-red-500 font-semibold px-3 py-1 rounded-sm';
-  let classDefault = 'px-3 py-1 rounded-sm';
-
-  let classActiveMobile = 'p-3 rounded-md overflow-hidden bg-red-600';
-  let classDefaultMobile = 'p-3 rounded-md overflow-hidden';
+  let classActive = `bg-[var(--primary)] font-semibold px-3 py-1 rounded-sm ${!darkMode ? 'text-white' : null}`;
+  let classDefault = `px-3 py-1 rounded-sm`;
+  let classActiveMobile = `p-3 rounded-md overflow-hidden bg-red-600 ${!darkMode ? 'text-white' : null}`;
+  let classDefaultMobile = `p-3 rounded-md overflow-hidden`;
   return (
     <>
       {mode === 'desktop' ? (

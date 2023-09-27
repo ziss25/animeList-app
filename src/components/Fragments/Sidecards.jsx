@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import Title from '../Elements/Title';
 import CardList from '../Fragments/CardList';
 import SkeletonMostFavorite from '../Elements/SkeletonMostFavorite';
+import { Context } from '../../context/myContext';
 
 const Sidecards = ({ dataFetch, title }) => {
+  const { darkMode } = useContext(Context);
   const [dataAnime, SetDataAnime] = useState([]);
   const [count, setCount] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
@@ -37,7 +39,12 @@ const Sidecards = ({ dataFetch, title }) => {
       <div className="hidden absolute top-0  px-4 right-2 w-[330px] h-[90%] overflow-auto flex-col gap-2 lg:flex 2xl:w-[450px] p-3">
         <Title title={title} style="mb-5 text-xl font-bold border-b-4 pb-1 border-[var(--primary)] inline-block text-center" />
 
-        <div className="overflow-auto  border-l pl-5 overflow-x-hidden border-stone-700">
+        <div
+          className={`
+          ${darkMode ? 'border-stone-700' : 'border-stone-300'} 
+          overflow-auto  border-l pl-5 overflow-x-hidden
+          `} //
+        >
           {isLoading
             ? // data loading
               arrSkeleton.map((data, index) => <SkeletonMostFavorite key={index} />)

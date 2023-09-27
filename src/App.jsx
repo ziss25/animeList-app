@@ -5,10 +5,10 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Search from './pages/Search';
 import PosterDetail from './pages/PosterDetail';
-import { Provider } from './context/myContext';
+import { Context, Provider } from './context/myContext';
 import MenuNavbar from './components/Templates/MenuNavbar';
 import GlobalLoading from './components/GlobalLoading';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Top from './pages/Top';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -28,7 +28,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <section className={`overflow-hidden bg-black relative`}>
+        <section className={`overflow-hidden relative `}>
           <Provider>
             <Headers />
             <MenuNavbar />

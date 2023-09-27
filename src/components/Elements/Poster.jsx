@@ -3,10 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Context } from '../../context/myContext';
 
 const Poster = ({ data, index, rated }) => {
+  const { darkMode } = useContext(Context);
+  const { setScrollPosition } = useContext(Context);
+
   const [title, setTitle] = useState('');
   const [img, setImg] = useState('');
   const [rating, setRating] = useState('');
-  const { setScrollPosition } = useContext(Context);
 
   const navigate = useNavigate();
 
@@ -41,7 +43,11 @@ const Poster = ({ data, index, rated }) => {
           <img className="object-cover" src={img} alt="" />
         </div>
         <div className="poster__body typograpy-overflow-title p-3 flex items-center justify-center w-full">
-          <h1 className="typograpy-overflow-title text-center">{title}</h1>
+          {darkMode ? (
+            <h1 className="typograpy-overflow-title text-center">{title}</h1> //
+          ) : (
+            <h1 className="typograpy-overflow-title text-center text-black">{title}</h1>
+          )}
         </div>
       </div>
     </>

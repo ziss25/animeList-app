@@ -6,12 +6,13 @@ import Navbar from '../Fragments/Navbar';
 
 const MenuNavbar = () => {
   const { isOpenMenuList, setIsOpenMenuList } = useContext(Context);
+  const { darkMode } = useContext(Context);
 
   let classMenu;
   if (isOpenMenuList) {
-    classMenu = 'menuNavbarMobile menuNavbar_active';
+    classMenu = `${darkMode ? 'menuNavbarMobile' : 'menuNavbarMobile--light'} menuNavbar_active `;
   } else {
-    classMenu = 'menuNavbarMobile';
+    classMenu = `${darkMode ? 'menuNavbarMobile' : 'menuNavbarMobile--light'}`;
   }
 
   const handleMenuList = () => {

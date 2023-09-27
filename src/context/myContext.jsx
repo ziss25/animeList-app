@@ -13,6 +13,8 @@ const Provider = ({ children }) => {
   const [openProfilePopUp, setOpenProfilePopUp] = useState(false);
   const [isOpenProfile, setIsOpenProfile] = useState(false);
   const [statusLogin, setStatusLogin] = useState(false);
+  // as light mode
+  const [darkMode, setDarkMode] = useState(true);
 
   return (
     <Context.Provider
@@ -35,6 +37,8 @@ const Provider = ({ children }) => {
         setIsOpenProfile,
         statusLogin,
         setStatusLogin,
+        darkMode,
+        setDarkMode,
       }}
     >
       {children}

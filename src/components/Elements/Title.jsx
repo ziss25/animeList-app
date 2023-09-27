@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context } from '../../context/myContext';
 
 const Title = ({ title, style }) => {
-  return <h1 className={style}>{title}</h1>;
+  const { darkMode } = useContext(Context);
+  return <h1 className={`${style} ${darkMode ? 'text-white' : 'text-black'}`}>{title}</h1>;
 };
 
 export default Title;

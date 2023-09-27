@@ -1,10 +1,12 @@
 import { CircularProgress } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { fetchAnimesSeasonNow } from '../../api/apiMyAnimeList';
+import { Context } from '../../context/myContext';
 import { CustomPagination } from '../../utils/CustomMui';
 import Poster from '../Elements/Poster';
 
 const SeasonNow = () => {
+  const { darkMode } = useContext(Context);
   const [data, setData] = useState([]);
   const [Isloading, setIsLoading] = useState(true);
   const [totalPage, setTotalPage] = useState(0);
@@ -31,7 +33,7 @@ const SeasonNow = () => {
   return (
     <>
       <div className="recomendation-Anime mt-10">
-        <h1 className="mb-5 text-xl font-bold border-b-4 pb-1 border-[var(--primary)] inline-block">Season Now</h1>
+        <h1 className={`mb-5 text-xl font-bold border-b-4 pb-1 border-[var(--primary)] inline-block ${darkMode ? 'text-white' : 'text-black'}`}>Season Now</h1>
 
         {Isloading ? (
           <div className="scale-50 flex justify-center">

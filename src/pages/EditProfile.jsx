@@ -150,7 +150,7 @@ const EditProfile = () => {
 
   return (
     <div className="fixed  top-0 right-0 left-0 bottom-0  min-h-screen overflow-y-auto  overflow-x-hidden overflow-y-auto  bg-black z-[800]">
-      <div className="text-white h-full  overflow-auto max-w-xl mx-auto md:mt-10 bg-zinc-900 rounded-lg ">
+      <div className="text-white h-full overflow-auto max-w-xl mx-auto md:mt-20 bg-zinc-900 rounded-lg  md:h-max">
         <div className="text-center p-5 flex flex-col justify-between  h-full">
           {msg && (
             <div className="alert alert-success  mb-2">

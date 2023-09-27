@@ -1,10 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { bgOnePiece, bgDemonSLayer, bgNaruto, bgJujutsu, bgChainsawMan } from '../../assets/index-img';
+import { Context } from '../../context/myContext';
 import Star from '../Elements/Stars';
 
 const HeroListShow = ({ listID }) => {
+  const { darkMode } = useContext(Context);
   const [title, setTitle] = useState('');
   const [score, setScore] = useState('');
   const [synopsis, setSynopsis] = useState('');
@@ -46,8 +48,19 @@ const HeroListShow = ({ listID }) => {
 
   return (
     <div className="hero" style={{ backgroundImage: `url(${bg})` }}>
-      <div className="hero__layer--full"></div>
-      <div className="hero__layer--bottomToTop"></div>
+      {darkMode ? (
+        // darkmode
+        <>
+          <div className="hero__layer--full"></div>
+          <div className="hero__layer--bottomToTop"></div>
+        </>
+      ) : (
+        // lightmode
+        <>
+          <div className="hero__layer--full--light"></div>
+          <div className="hero__layer--bottomToTop--light"></div>
+        </>
+      )}
       <div className="hero__context z-50">
         <h1 className="text-4xl font-bold mb-2  2xl:text-6xl 2xl:mb-8">{title}</h1>
         <p className="mb-2 typograpy-oveflow md:text-md 2xl:text-2xl">{synopsis}</p>
