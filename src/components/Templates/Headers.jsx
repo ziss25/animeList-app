@@ -54,6 +54,10 @@ const Headers = () => {
     setisScrollbg(window.scrollY);
   });
 
+  // useEffect(() => {
+  //   console.log(isScrollbg);
+  // }, [isScrollbg]);
+
   useEffect(() => {
     getToken();
     parseToken();
@@ -69,7 +73,7 @@ const Headers = () => {
             <LogoTitle style="text-xl md:text-2xl 2xl:text-3xl" />
           </div>
           <Navbar mode="desktop" />
-          <div className="flex gap-5 items-center">
+          <div className="flex gap-5 items-center cursor-pointer">
             <DarkModeIcon onClick={() => setDarkMode(!darkMode)} />
             {!statusLogin || !token ? (
               <button
@@ -118,7 +122,7 @@ const Headers = () => {
           </div>
         </div>
       ) : (
-        <div className="header--light">
+        <div className={`${isScrollbg ? 'header-active-light' : 'header--light'} `}>
           {/* <div className="header"> */}
           <div className="flex items-center gap-7 ">
             <HambButton handleMenuList={handleMenuList} />

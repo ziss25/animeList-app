@@ -12,6 +12,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { fetchAnimesPicturesById } from '../api/apiMyAnimeList';
 
 const PosterDetail = () => {
+  const { darkMode } = useContext(Context);
   const { id } = useParams();
   const [title, setTitle] = useState('');
   const [titleEng, setTitleEng] = useState('');
@@ -94,24 +95,24 @@ const PosterDetail = () => {
         <GlobalLoading />
       ) : (
         <>
-          <div className="container grid grid-cols-1 justify-center items-center mx-auto max-w-3xl mx-auto  lg:max-w-5xl">
+          <div className={`container grid grid-cols-1 justify-center items-center mx-auto max-w-3xl mx-auto  lg:max-w-5xl ${darkMode ? 'text-white' : 'text-black'}`}>
             <section className="w-32 ml-10 md:ml-0">
               <Button variant="outlined" color="error" size="small" endIcon={<ArrowBackIcon />} onClick={handleCardClick}>
                 Back
               </Button>
             </section>
-            <section className="cardsDetail__header gap-5 md:flex md:max-w-4xl md:mx-auto mt-6">
+            <section className="cardsDetail__header  gap-5 md:flex md:max-w-4xl md:mx-auto mt-6">
               <div className="relative mx-auto cardsDetail__header-img flex  justify-center w-60  md:h-fit">
                 <img src={img} alt="" className="w-full h-full" />
                 <StarsLogo rating={score} />
               </div>
               <div className="cardsDetail__header-content text-center gap-y-3 md:translate-x-10 justify-center py-10 flex-col md:text-start md:flex ">
                 <div className="hidden md:flex stars-score">{score ? <Star stars={score} /> : <h1>-</h1>}</div>
-                <div className="-mt-5 md:mt-0">
+                <div className={`-mt-5 md:mt-0`}>
                   <p className="text-[#aeaeae] text-xs md:text-lg ">
                     <span>{season}</span> <span>{years}</span>
                   </p>
-                  <h1 className="text-lg md:text-4xl">{title}</h1>
+                  <h1 className={`text-lg md:text-4xl`}>{title}</h1>
                   <h4 className="text-md text-[#aeaeae] typograpy-oveflow--line1 md:text-xl">{titleEng}</h4>
                   <ul className="taq flex gap-3 text-center scale-75 justify-center  mt-2 md:scale-100 md:justify-start">
                     {genres.map((data, index) => (
@@ -127,7 +128,7 @@ const PosterDetail = () => {
                 </div>
               </div>
             </section>
-            <section className="cardsDetail__source max-w-xl mx-auto md:mt-10 mb-6 -mt-4 bg-stone-900  py-1 rounded-md -translate-x-[8px] md:translate-x-2">
+            <section className={`cardsDetail__source max-w-xl mx-auto md:mt-10 mb-6 -mt-4  py-1 rounded-md -translate-x-[8px] md:translate-x-2 ${darkMode ? 'bg-stone-900' : 'bg-stone-300 '}`}>
               <ul className="flex gap-5 px-5 py-1 md:gap-10">
                 <li className="text-xs flex gap-y-1 flex-col justify-center">
                   <p className="text-center">type</p>

@@ -1,15 +1,17 @@
 import { Avatar, Button, Skeleton } from '@mui/material';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { stringAvatar } from '../utils/utilAvatar';
 import EditIcon from '@mui/icons-material/Edit';
 import bg2 from '../assets/demon-slayer-1.png';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Context } from '../context/myContext';
 
 const ProfileUser = () => {
+  const { darkMode } = useContext(Context);
   const location = useLocation();
   const navigate = useNavigate();
   const [name, setName] = useState('');
@@ -40,8 +42,8 @@ const ProfileUser = () => {
     getUser();
   }, []);
   return (
-    <div className="fixed flex justify-center items-center  top-0 right-0 left-0 bottom-0 min-h-screen overflow-auto bg-black z-[800]">
-      <div className="text-white bg-neutral-900  md:mt-0 rounded-lg my-10 w-[300px] lg:w-[350px] mx-2 overflow-hidden">
+    <div className={`fixed flex justify-center items-center  top-0 right-0 left-0 bottom-0 min-h-screen overflow-auto  z-[800] ${darkMode ? 'bg-black ' : 'bg-white'}`}>
+      <div className={`text-white   md:mt-0 rounded-lg my-10 w-[300px] lg:w-[350px] mx-2 overflow-hidden ${darkMode ? 'bg-neutral-900' : 'bg-neutral-200'}`}>
         <div className="header-bg relative h-[200px] flex  justify-center bg-cover" style={{ backgroundImage: `url(${bg2})` }}>
           {/* loading */}
           {loadingResources ? (
@@ -67,7 +69,7 @@ const ProfileUser = () => {
               <Skeleton variant="text" sx={{ bgcolor: '#6b7280' }} />
             </div>
           ) : (
-            <h1 className="text-xl mb-1 font-semibold">{name}</h1>
+            <h1 className={`text-xl mb-1 font-semibold  ${darkMode ? 'text-white' : 'text-black'}`}>{name}</h1>
           )}
           {loadingResources ? (
             <>
@@ -77,9 +79,9 @@ const ProfileUser = () => {
               </div>
             </>
           ) : (
-            <p className="text-zinc-400 text-sm">{description}</p>
+            <p className={`text-sm ${darkMode ? 'text-zinc-400' : 'text-black'}`}>{description}</p>
           )}
-          <div className="flex border-t-2 pt-2 border-zinc-700  justify-between items-center mt-10 gap-4">
+          <div className={`flex border-t-2 pt-2   justify-between items-center mt-10 gap-4 ${darkMode ? 'border-zinc-700' : 'border-zinc-400'}`}>
             <section className="w-32 translate-y-1 -translate-x-4">
               <Button
                 color="error"
@@ -92,10 +94,10 @@ const ProfileUser = () => {
                 Back
               </Button>
             </section>
-            <div className="">
+            <div className={`${darkMode ? 'text-white' : 'text-black'}`}>
               <button className="flex gap-2 mx-auto  justify-center hover:border-[var(--primary)]" onClick={() => navigate('edit')}>
                 <p className="text-sm">edit profile</p>
-                <EditIcon sx={{ color: 'white', fontSize: 20 }} />
+                <EditIcon sx={{ color: darkMode ? 'text-white' : 'text-black', fontSize: 20 }} />
               </button>
             </div>
           </div>

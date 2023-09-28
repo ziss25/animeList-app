@@ -1,4 +1,4 @@
-import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+import { Link, useMatch, useParams, useResolvedPath } from 'react-router-dom';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { useContext } from 'react';
 import { Context } from '../../context/myContext';
@@ -23,7 +23,7 @@ export default function Navbar({ mode }) {
             <CustomLink mode={mode} to="/search" darkMode={darkMode}>
               search
             </CustomLink>
-            <CustomLink mode={mode} to="/userlist " darkMode={darkMode}>
+            <CustomLink mode={mode} to="/users" darkMode={darkMode}>
               users
             </CustomLink>
           </ul>
@@ -46,7 +46,7 @@ export default function Navbar({ mode }) {
             <i className="fa fa-search" aria-hidden="true"></i>
             <h3>search</h3>
           </CustomLink>
-          <CustomLink to="/userlist">
+          <CustomLink to="/users">
             <PeopleAltIcon />
             <h3>Users</h3>
           </CustomLink>
@@ -59,19 +59,26 @@ export default function Navbar({ mode }) {
 function CustomLink({ to, children, mode, darkMode, ...props }) {
   const resolvedPath = useResolvedPath(to);
   const isActive = useMatch({ path: resolvedPath.pathname, end: true });
-
-  let classActive = `bg-[var(--primary)] font-semibold px-3 py-1 rounded-sm ${!darkMode ? 'text-white' : null}`;
+  let classActive = `font-semibold px-3 py-1 rounded-sm bg-[var(--primary)] ${!darkMode ? 'text-white' : null}`;
   let classDefault = `px-3 py-1 rounded-sm`;
-  let classActiveMobile = `p-3 rounded-md overflow-hidden bg-red-600 ${!darkMode ? 'text-white' : null}`;
+  let classActiveMobile = `p-3 rounded-md overflow-hidden bg-[var(--primary)] ${!darkMode ? 'text-white' : null}`;
   let classDefaultMobile = `p-3 rounded-md overflow-hidden`;
   return (
     <>
       {mode === 'desktop' ? (
-        <li className={isActive ? classActive : classDefault}>
-          <Link to={to} {...props}>
-            {children}
-          </Link>
-        </li>
+        isActive ? (
+          <li className={classActive}>
+            <Link to={to} {...props}>
+              {children}
+            </Link>
+          </li>
+        ) : (
+          <li className={classDefault}>
+            <Link to={to} {...props}>
+              {children}
+            </Link>
+          </li>
+        )
       ) : (
         <li className={isActive ? classActiveMobile : classDefaultMobile}>
           <Link className="flex gap-5 items-center" to={to} {...props}>

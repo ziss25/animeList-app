@@ -45,3 +45,30 @@ export const CustomTextField = styled(TextField)(({ theme }) => ({
     },
   },
 }));
+
+export const CustomTextFieldLight = styled(TextField)(({ theme }) => ({
+  '& .MuiInputBase-input': {
+    // backgroundColor: '#3f3f46', // Ubah warna latar belakang input
+    borderRadius: theme.spacing(1), // Tambahkan radius sudut input
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  '& .MuiInputBase-input:hover': {
+    // backgroundColor: '#52525b', // Ubah warna latar belakang saat hover
+  },
+  '& .MuiInputLabel-root': {
+    color: 'black', // Ubah warna label
+    fontWeight: 'bold',
+  },
+  '& .MuiInputLabel-root.Mui-focused': {
+    color: 'black', // Warna label saat dalam keadaan fokus
+  },
+  '& .MuiOutlinedInput-root': {
+    '&:hover fieldset': {
+      borderColor: 'black', // Ubah warna border saat hover
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'black', // Ubah warna border saat dalam keadaan fokus
+    },
+  },
+}));

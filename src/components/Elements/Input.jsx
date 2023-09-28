@@ -1,8 +1,10 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { FilledInput, FormControl, IconButton, InputAdornment, InputLabel, TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Context } from '../../context/myContext';
 
 const Input = ({ title, onChange, type, icon, isErorr }) => {
+  const { darkMode } = useContext(Context);
   const [result, setResult] = useState('');
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -20,13 +22,13 @@ const Input = ({ title, onChange, type, icon, isErorr }) => {
           sx={{
             m: 1,
             '& label': {
-              color: 'white',
+              color: darkMode ? 'white' : 'black',
             },
             '& input': {
-              color: 'white',
-              borderColor: 'white',
+              color: darkMode ? 'white' : 'black',
+              borderColor: darkMode ? 'white' : 'black',
               '&:focus': {
-                borderColor: 'white',
+                borderColor: darkMode ? 'white' : 'black',
               },
             },
           }}
@@ -42,7 +44,7 @@ const Input = ({ title, onChange, type, icon, isErorr }) => {
                 <InputAdornment position="end">
                   <IconButton
                     sx={{
-                      color: 'white',
+                      color: darkMode ? 'white' : 'black',
                     }}
                     aria-label="toggle password visibility"
                     onClick={handleClickShowPassword}
@@ -63,7 +65,7 @@ const Input = ({ title, onChange, type, icon, isErorr }) => {
                 <InputAdornment position="end">
                   <IconButton
                     sx={{
-                      color: 'white',
+                      color: darkMode ? 'white' : 'black',
                     }}
                     edge="end"
                   >
@@ -80,23 +82,3 @@ const Input = ({ title, onChange, type, icon, isErorr }) => {
 };
 
 export default Input;
-
-{
-  /* <TextField
-          id="standard-basic"
-          variant="standard"
-          label={title}
-          sx={{
-            '& input': {
-              color: 'white',
-              '&:hover, &:focus': {
-                borderColor: 'white', // Warna border putih saat hover atau focus
-                color: 'white',
-              },
-            },
-            '& label': {
-              color: 'white', // Warna label putih
-            },
-          }}
-        /> */
-}

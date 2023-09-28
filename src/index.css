@@ -97,10 +97,13 @@ html {
     @apply fixed flex h-14 top-0 right-0 left-0 px-7 z-30 text-white bg-transparent justify-between items-center 2xl:h-20;
   }
   .header--light {
-    @apply fixed flex h-14 top-0 right-0 left-0 px-7 z-30 text-white bg-transparent justify-between items-center bg-white;
+    @apply fixed flex h-14 top-0 right-0 left-0 px-7 z-30 text-white bg-transparent justify-between items-center 2xl:h-20;
+  }
+  .header-active-light {
+    @apply fixed flex h-14 top-0 right-0 left-0 px-7 z-30 text-white justify-between items-center bg-white;
   }
   .header-active-navigate {
-    @apply fixed flex h-14 top-0 right-0 left-0 px-7 z-30 text-white bg-transparent justify-between items-center bg-black;
+    @apply fixed flex h-14 top-0 right-0 left-0 px-7 z-30 text-white  justify-between items-center bg-black;
   }
 
   /*  menuNavbarMobile */

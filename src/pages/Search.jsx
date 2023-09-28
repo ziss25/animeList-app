@@ -1,15 +1,15 @@
 import { Autocomplete, CircularProgress } from '@mui/material';
 import { Stack } from '@mui/system';
 import React, { useContext, useEffect, useState } from 'react';
-import { CustomTextField } from '../utils/CustomMui';
+import { CustomTextField, CustomTextFieldLight } from '../utils/CustomMui';
 import { useNavigate } from 'react-router-dom';
 import { Context } from '../context/myContext';
 import axios from 'axios';
 
 const Search = () => {
+  const { querySearch, setQuerySearch, darkMode } = useContext(Context);
   const [dataResult, setDataResult] = useState([]);
   const [type, setType] = useState('');
-  const { querySearch, setQuerySearch } = useContext(Context);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -54,9 +54,9 @@ const Search = () => {
   }, [querySearch, type]);
 
   return (
-    <div className="mt-20 md:mt-24 min-h-screen bg-black max-w-xl lg:max-w-4xl mx-auto px-5">
-      <div className="search-group md:flex justify-between">
-        <div className="search w-full md:w-8/12 ">
+    <div className={`mt-20 md:mt-24 min-h-screen max-w-xl lg:max-w-4xl mx-auto px-5 ${darkMode ? 'bg-black' : 'bg-white'}`}>
+      <div className="search-group md:flex  justify-between">
+        <div className="search w-full md:w-8/12  ">
           <Stack spacing={2}>
             <Autocomplete
               freeSolo
@@ -69,22 +69,41 @@ const Search = () => {
                 padding: '1px',
               }}
               renderInput={(params) => (
-                <CustomTextField
-                  {...params}
-                  label="search soonFlix"
-                  placeholder={querySearch}
-                  InputProps={{
-                    ...params.InputProps,
-                    type: 'search',
-                  }}
-                  onChange={handleInputUser}
-                />
+                <>
+                  {darkMode ? (
+                    <CustomTextField
+                      {...params}
+                      label="search soonFlix"
+                      placeholder={querySearch}
+                      InputProps={{
+                        ...params.InputProps,
+                        type: 'search',
+                      }}
+                      onChange={handleInputUser}
+                    />
+                  ) : (
+                    <CustomTextFieldLight
+                      {...params}
+                      label="search soonFlix"
+                      placeholder={querySearch}
+                      InputProps={{
+                        ...params.InputProps,
+                        type: 'search',
+                      }}
+                      onChange={handleInputUser}
+                    />
+                  )}
+                </>
               )}
             />
           </Stack>
         </div>
         <div className="w-full md:w-3/12 mt-5 md:mt-0">
-          <select className="select  w-full h-full" onChange={handleTypeClick}>
+          <select
+            className={`select  w-full h-full 
+          ${darkMode ? 'bg-gray-800 text-white' : 'bg-slate-200 text-black'} `}
+            onChange={handleTypeClick}
+          >
             {typeCategory.map((type, index) => (
               <option key={index}>{type.label}</option>
             ))}

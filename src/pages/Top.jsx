@@ -45,86 +45,88 @@ const Top = () => {
     setCurrentPage(value);
   };
 
+  // useEffect(() => {
+  //   console.log(darkMode);
+  // }, [darkMode]);
+
   useEffect(() => {
     getBgFilter();
   }, [filter, currentPage]);
 
   return (
-    <div className={`fixed top-14 right-0 bg-black left-0 bottom-0 overflow-y-auto ${darkMode ? 'bg-black' : 'bg-white'}`}>
-      <div className=" mt-16 min-h-screen max-w-3xl mx-auto  text-white px-3">
-        <section className="button-category-top  mt-10 grid grid-cols-2 justify-items-center gap-2 md:gap-5 md:scale-75 ">
-          <ButtonTopITem
-            bgImages={`bg-[url('https://cdn.myanimelist.net/images/anime/1208/94745l.jpg')]`}
-            title="rank" //
-            layerColor="bg-red-600"
-            handleClick={handleClick}
-          />
-          <ButtonTopITem
-            bgImages={`bg-[url('https://cdn.myanimelist.net/images/anime/6/73245l.jpg')]`}
-            title="bypopularity" //
-            layerColor="bg-green-600"
-            handleClick={handleClick}
-          />
-          <ButtonTopITem
-            bgImages={`bg-[url('https://cdn.myanimelist.net/images/anime/1286/99889l.jpg')]`}
-            title="favorite" //
-            layerColor="bg-blue-600"
-            handleClick={handleClick}
-          />
-          <ButtonTopITem
-            bgImages={`bg-[url('https://cdn.myanimelist.net/images/anime/1171/109222l.jpg')]`}
-            title="airing" //
-            layerColor="bg-yellow-600"
-            handleClick={handleClick}
-          />
-        </section>
+    <div className={`mt-16 min-h-screen max-w-3xl mx-auto px-3 ${darkMode ? 'bg-black' : 'bg-white'}`}>
+      <section className="button-category-top  mt-10 grid grid-cols-2 justify-items-center gap-2 md:gap-5 md:scale-75 ">
+        <ButtonTopITem
+          bgImages={`bg-[url('https://cdn.myanimelist.net/images/anime/1208/94745l.jpg')]`}
+          title="rank" //
+          layerColor="bg-red-600"
+          handleClick={handleClick}
+        />
+        <ButtonTopITem
+          bgImages={`bg-[url('https://cdn.myanimelist.net/images/anime/6/73245l.jpg')]`}
+          title="bypopularity" //
+          layerColor="bg-green-600"
+          handleClick={handleClick}
+        />
+        <ButtonTopITem
+          bgImages={`bg-[url('https://cdn.myanimelist.net/images/anime/1286/99889l.jpg')]`}
+          title="favorite" //
+          layerColor="bg-blue-600"
+          handleClick={handleClick}
+        />
+        <ButtonTopITem
+          bgImages={`bg-[url('https://cdn.myanimelist.net/images/anime/1171/109222l.jpg')]`}
+          title="airing" //
+          layerColor="bg-yellow-600"
+          handleClick={handleClick}
+        />
+      </section>
 
-        <section className="mt-5 flex justify-center">
-          <Title title={`Top ${filter}`} style={`mb-5 text-xl  font-bold border-b-4 pb-1 border-[var(--primary)] inline-block`} />
-        </section>
+      <section className="mt-5  flex justify-center">
+        <Title title={`Top ${filter}`} style={`mb-5 text-xl  font-bold border-b-4 pb-1 border-[var(--primary)] inline-block`} />
+      </section>
 
-        <section className="relative ">
-          {isLoading ? (
-            <div className="scale-50 flex top-0 right-0 left-0 bottom-0 absolute justify-center">
-              <CircularProgress />
-            </div>
-          ) : (
-            <>
-              {loadingPagination ? (
-                <div className="relative mb-10 border border-black">
-                  <div className="scale-50 flex mb-10 top-0 right-0 left-0 bottom-0 absolute justify-center">
-                    <CircularProgress />
-                  </div>
+      <section className="relative ">
+        {isLoading ? (
+          <div className="scale-50 flex top-0 right-0 left-0 bottom-0 absolute justify-center">
+            <CircularProgress />
+          </div>
+        ) : (
+          <>
+            {loadingPagination ? (
+              <div className="relative mb-10 border border-black">
+                <div className="scale-50 flex mb-10 top-0 right-0 left-0 bottom-0 absolute justify-center">
+                  <CircularProgress />
                 </div>
-              ) : (
-                <section className="p-3">
-                  {data.map((anime, index) => (
-                    <div
-                      key={index}
-                      className="myCardsTop mb-5 relative cursor-pointer"
-                      onClick={() => {
-                        window.scrollTo(0, 0);
-                        navigate(`/poster/${anime.mal_id}`, { state: { to: 'backToTop' } });
-                      }}
-                    >
-                      <ItemTop anime={anime} filter={filter} index={index} currentPage={currentPage} />
-                    </div>
-                  ))}
-                </section>
-              )}
-
-              <div className=" flex justify-center mt-10">
-                <CustomPagination
-                  count={totalPage} //
-                  variant="outlined"
-                  shape="rounded"
-                  onChange={handlePageChange}
-                />
               </div>
-            </>
-          )}
-        </section>
-      </div>
+            ) : (
+              <section className="p-3">
+                {data.map((anime, index) => (
+                  <div
+                    key={index}
+                    className="myCardsTop mb-5 relative cursor-pointer"
+                    onClick={() => {
+                      window.scrollTo(0, 0);
+                      navigate(`/poster/${anime.mal_id}`, { state: { to: 'backToTop' } });
+                    }}
+                  >
+                    <ItemTop anime={anime} filter={filter} index={index} currentPage={currentPage} />
+                  </div>
+                ))}
+              </section>
+            )}
+
+            <div className=" flex justify-center mt-10">
+              <CustomPagination
+                count={totalPage} //
+                variant="outlined"
+                shape="rounded"
+                onChange={handlePageChange}
+              />
+            </div>
+          </>
+        )}
+      </section>
     </div>
   );
 };

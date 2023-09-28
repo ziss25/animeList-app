@@ -8,6 +8,7 @@ import AlertErorr from '../components/Elements/AlertErorr';
 import { Context } from '../context/myContext';
 
 const Login = () => {
+  const { darkMode } = useContext(Context);
   const navigate = useNavigate();
   const location = useLocation();
   const [username, setUsername] = useState('');
@@ -63,12 +64,12 @@ const Login = () => {
 
   return (
     <>
-      <section className="login bg-black relative z-[9999] min-h-screen flex flex-col items-center text-white justify-center">
+      <section className={`loginrelative z-[9999] min-h-screen flex fixed top-0 right-0 left-0 bottom-0 flex-col items-center text-white justify-center ${darkMode ? 'bg-black' : 'bg-white'}`}>
         <LogoTitle style="text-xl md:text-2xl 2xl:text-3xl mb-3" />
-        <div className="  bg-zinc-900  border-[#aeaeae] rounded-md w-5/6 md:w-4/6 lg:w-2/6 mx-auto px-5">
+        <div className={`  border-[#aeaeae] rounded-md w-5/6 md:w-4/6 lg:w-2/6 mx-auto px-5 ${darkMode ? 'bg-zinc-900' : 'bg-zinc-200'}`}>
           {/* jika gagal login maka text ini tampil maka  */}
           {textErorr && <AlertErorr textErorr={textErorr} />}
-          <h1 className="mt-5 text-center text-2xl mb-5">Login</h1>
+          <h1 className={`mt-5 text-center text-2xl mb-5 ${darkMode ? 'text-white' : 'text-black'}`}>Login</h1>
           <form onSubmit={auth}>
             <Input
               icon={<Person fontSize="small" />}
@@ -100,7 +101,7 @@ const Login = () => {
             </button>
           </form>
           <section className="scale-75">
-            <h3 className="text-center mt-5">don't have an account ? </h3>
+            <h3 className={`text-center mt-5 ${darkMode ? 'text-white' : 'text-black'}`}>don't have an account ? </h3>
             <div className="flex justify-center">
               <div>
                 <button

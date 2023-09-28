@@ -10,7 +10,7 @@ import { CircularProgress } from '@mui/material';
 
 const Season = () => {
   const [seasonList, setSeasonList] = useState([]);
-  const { years, setYears, season, setSeason } = useContext(Context);
+  const { years, setYears, season, setSeason, darkMode } = useContext(Context);
   const [data, setData] = useState([]);
   const [loadingPagination, setloadingPagination] = useState(true);
   const [loading, setLoading] = useState(true);
@@ -55,9 +55,14 @@ const Season = () => {
 
   return (
     <div className="min-h-screen mt-16 px-5 max-w-3xl mx-auto">
-      <Title title="season" style={'mb-5 text-xl text-white font-bold border-b-4 pb-1 border-[var(--primary)] inline-block'} />
-      <div className="grop-category flex gap-5  justify-between">
-        <select className="select select-bordered select w-full max-w-xs" onChange={handleSeasonListSeason}>
+      <Title title="season" style={`mb-5 text-xl font-bold border-b-4 pb-1 border-[var(--primary)] inline-block ${darkMode ? 'text-white' : 'text-black'}`} />
+      <div className="grop-category flex gap-5 justify-between">
+        <select
+          className={`
+        select select-bordered select w-full max-w-xs // 
+        ${darkMode ? 'bg-gray-800 text-white' : 'bg-slate-200 text-black'} `}
+          onChange={handleSeasonListSeason}
+        >
           <option disabled selected>
             {season}
           </option>
@@ -67,7 +72,12 @@ const Season = () => {
           <option>fall</option>
         </select>
 
-        <select className="select select-bordered select w-full max-w-xs" onChange={handleSeasonListYear}>
+        <select
+          className={`
+        select select-bordered select w-full max-w-xs // 
+        ${darkMode ? 'bg-gray-800 text-white' : 'bg-slate-200 text-black'} `}
+          onChange={handleSeasonListYear}
+        >
           <option disabled selected>
             {years}
           </option>

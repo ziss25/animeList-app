@@ -10,8 +10,10 @@ import { Context } from '../context/myContext';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const EditProfile = () => {
+  const { darkMode } = useContext(Context);
   const navigate = useNavigate();
   const [name, setName] = useState('');
+  const [nameUser, setNameUser] = useState('');
   const [description, setDescription] = useState('');
   const [images, setImages] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
@@ -32,7 +34,7 @@ const EditProfile = () => {
       const decodedToken = await jwtDecode(response.data.accessToken);
       setId(decodedToken.userId);
       setSelectedFile(decodedToken.avatar_url);
-      // console.log(decodedToken);
+      setNameUser(decodedToken.name);
     } catch (err) {
       navigate('/');
     }
@@ -144,13 +146,9 @@ const EditProfile = () => {
     getUser();
   }, []);
 
-  useEffect(() => {
-    console.log(selectedFile);
-  }, [selectedFile]);
-
   return (
-    <div className="fixed  top-0 right-0 left-0 bottom-0  min-h-screen overflow-y-auto  overflow-x-hidden overflow-y-auto  bg-black z-[800]">
-      <div className="text-white h-full overflow-auto max-w-xl mx-auto md:mt-20 bg-zinc-900 rounded-lg  md:h-max">
+    <div className={`fixed  top-0 right-0 left-0 bottom-0 z-[800] min-h-screen overflow-y-auto  overflow-x-hidden overflow-y-auto ${darkMode ? 'bg-black ' : 'bg-white'} `}>
+      <div className={`text-white h-full overflow-auto max-w-xl mx-auto md:mt-20 rounded-lg  md:h-max  ${darkMode ? 'bg-zinc-900 text-white' : 'bg-zinc-200 text-black'}`}>
         <div className="text-center p-5 flex flex-col justify-between  h-full">
           {msg && (
             <div className="alert alert-success  mb-2">
@@ -169,14 +167,23 @@ const EditProfile = () => {
               <span className="text-sm md:text-md xl:text-lg">{textErorr}</span>
             </div>
           )}
-          <div className="">
+          <div className={`${darkMode ? ' text-white' : 'text-black'}`}>
             <div className="mb-8 text-start flex flex-col items-center">
               <label htmlFor="fileInput" id="file-label" className="flex flex-col items-center cursor-pointer" style={{ cursor: 'pointer' }}>
-                <img
-                  src={selectedFile} //
-                  alt=""
-                  className="rounded-full w-20 h-20 object-cover"
-                />
+                {selectedFile ? (
+                  <img
+                    src={selectedFile} //
+                    alt=""
+                    className="rounded-full w-20 h-20 object-cover"
+                  />
+                ) : (
+                  <Avatar
+                    {...stringAvatar(nameUser, 'large')}
+                    onClick={() => {
+                      setOpenProfilePopUp(!openProfilePopUp);
+                    }}
+                  />
+                )}
                 change avatar
               </label>
               <input
@@ -196,13 +203,13 @@ const EditProfile = () => {
               <TextField
                 sx={{
                   '& label': {
-                    color: 'white',
+                    color: darkMode ? 'white' : 'black',
                   },
                   '& input': {
-                    color: 'white',
-                    borderColor: 'white',
+                    color: darkMode ? 'white' : 'black',
+                    borderColor: darkMode ? 'white' : 'black',
                     '&:focus': {
-                      borderColor: 'white',
+                      borderColor: darkMode ? 'white' : 'black',
                     },
                   },
                 }}
@@ -223,11 +230,11 @@ const EditProfile = () => {
               <TextField
                 sx={{
                   '& label': {
-                    color: 'white',
+                    color: darkMode ? 'white' : 'black',
                   },
                   '& .MuiInputBase-root': {
-                    color: 'white',
-                    borderBottomColor: 'white',
+                    color: darkMode ? 'white' : 'black',
+                    borderBottomColor: darkMode ? 'white' : 'black',
                   },
                 }}
                 fullWidth

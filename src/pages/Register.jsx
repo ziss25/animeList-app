@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Password, Person } from '@mui/icons-material';
 import Input from '../components/Elements/Input';
 import CreateIcon from '@mui/icons-material/Create';
@@ -6,8 +6,10 @@ import KeyIcon from '@mui/icons-material/Key';
 import LogoTitle from '../components/Elements/LogoTitle';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Context } from '../context/myContext';
 
 const Register = () => {
+  const { darkMode } = useContext(Context);
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
@@ -81,9 +83,9 @@ const Register = () => {
 
   return (
     <>
-      <section className="register bg-black relative z-[9999]  min-h-screen flex items-center text-white flex-col justify-center">
+      <section className={`register  relative z-[9999]  min-h-screen flex items-center text-white flex-col justify-center ${darkMode ? 'bg-black' : 'bg-white'}`}>
         <LogoTitle style="text-xl md:text-2xl 2xl:text-3xl mb-3" />
-        <div className="  bg-zinc-900 rounded-md w-5/6 md:w-4/6 lg:w-2/6 mx-auto px-3">
+        <div className={`rounded-md w-5/6 md:w-4/6 lg:w-2/6 mx-auto px-3 ${darkMode ? 'bg-zinc-900' : 'bg-zinc-200'}`}>
           {isSuccess ? (
             <div className="alert alert-success">
               <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
@@ -93,7 +95,7 @@ const Register = () => {
             </div>
           ) : null}
           <h1 className="text-center text-[var(--primary)]  p-3 font-bold">{textAlert}</h1>
-          <h1 className="mt-2 text-center text-2xl mb-5">Register</h1>
+          <h1 className={`mt-2 text-center text-2xl mb-5 ${darkMode ? 'text-white' : 'text-black'} `}>Register</h1>
           <form action="">
             <Input
               icon={<Person />} //
