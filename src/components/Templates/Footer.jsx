@@ -13,7 +13,7 @@ import { IconButton } from '@mui/material';
 const Footer = () => {
   const { darkMode } = useContext(Context);
   return (
-    <section className={`footer p-5 bg-zinc-900 ${!darkMode && 'bg-zinc-100'}`}>
+    <section className={`footer p-5 ${darkMode ? 'bg-zinc-900 ' : 'bg-zinc-200'}`}>
       <div className={`container flex gap-5 flex-col md:flex-row md:justify-between items-center text-white mx-auto`}>
         <LogoTitle style="text-xl md:text-2xl 2xl:text-3xl " />
         <div className={`border-t  md:border-none ${darkMode ? 'text-white border-gray-700' : 'text-black border-gray-300'}`}>
