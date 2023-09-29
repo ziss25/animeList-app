@@ -116,7 +116,7 @@ const PosterDetail = () => {
                   <h4 className="text-md text-[#aeaeae] typograpy-oveflow--line1 md:text-xl">{titleEng}</h4>
                   <ul className="taq flex gap-3 text-center scale-75 justify-center  mt-2 md:scale-100 md:justify-start">
                     {genres.map((data, index) => (
-                      <li className="bg-[var(--primary)] inline-block px-2 py-1 rounded-md text-xs" key={index}>
+                      <li className={`bg-[var(--primary)] inline-block px-2 py-1 rounded-md text-xs text-white`} key={index}>
                         {data.name}
                       </li>
                     ))}
@@ -132,7 +132,7 @@ const PosterDetail = () => {
               <ul className="flex gap-5 px-5 py-1 md:gap-10">
                 <li className="text-xs flex gap-y-1 flex-col justify-center">
                   <p className="text-center">type</p>
-                  <span className="text-[var(--primary)] block text-center md:inline text-xs">{type}</span>
+                  <span className="text-[var(--primary)]  block text-center md:inline text-xs">{type}</span>
                 </li>
                 <li className="text-xs flex gap-y-1 flex-col justify-center">
                   <p className="text-center">sources</p>

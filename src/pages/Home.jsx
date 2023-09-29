@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import Footer from '../components/Templates/Footer';
 import Heros from '../components/Templates/Heros';
 import Main from '../components/Templates/Main';
 import { Context } from '../context/myContext';
@@ -13,6 +14,7 @@ const Home = () => {
       <div className={darkMode ? 'bg-black' : 'bg-white'}>
         <Heros />
         <Main />
+        <Footer />
       </div>
     </>
   );
